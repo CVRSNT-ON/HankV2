@@ -447,7 +447,7 @@ function _isAndroid() {
 function openAR(imgSrc, workId) {
   // ── iOS: Apple AR Quick Look (ARKit native, no app install) ──────────
   if (_isIOS() && workId) {
-    var usdzUrl = '../ar/' + workId + '.usdz';
+    var usdzUrl = '../ar/' + workId + '.usdz?v=' + Date.now();
     var a = document.createElement('a');
     a.rel = 'ar';
     a.href = usdzUrl;
@@ -467,7 +467,7 @@ function openAR(imgSrc, workId) {
     var glbUrl = window.location.origin + window.location.pathname.replace('works/view.html','') + 'ar/' + workId + '.glb';
     // Build absolute URL robustly
     var base = window.location.href.replace(/works\/view\.html.*/, '');
-    var absGlb = base + 'ar/' + workId + '.glb';
+    var absGlb = base + 'ar/' + workId + '.glb?v=' + Date.now();
     var intentUrl = 'intent://arvr.google.com/scene-viewer/1.0'
       + '?file=' + encodeURIComponent(absGlb)
       + '&mode=ar_preferred'
