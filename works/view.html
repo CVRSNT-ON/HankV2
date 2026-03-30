@@ -85,15 +85,17 @@ img{-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}
 .artwork-layout{opacity:0}
 
 /* AR Overlay */
-#arOverlay{display:none;position:fixed;inset:0;z-index:9999;background:#000;flex-direction:column}
-#arOverlay.open{display:flex}
-#arVideo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-#arCanvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
-#arPainting{position:absolute;cursor:grab;touch-action:none;user-select:none;box-shadow:0 8px 32px rgba(0,0,0,.55)}
+#arOverlay{display:none;position:fixed;inset:0;z-index:9999;background:#000}
+#arOverlay.open{display:block}
+#arCanvas{position:absolute;inset:0;width:100%;height:100%}
+#arVideo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none}
+#arPainting{display:none;position:absolute;cursor:grab;touch-action:none;user-select:none;box-shadow:0 8px 32px rgba(0,0,0,.55)}
 #arPainting:active{cursor:grabbing}
-#arClose{position:absolute;top:1.25rem;right:1.25rem;z-index:10;background:rgba(0,0,0,.55);border:1px solid rgba(255,255,255,.25);color:#fff;font-family:var(--body);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;padding:.55rem 1.2rem;cursor:pointer;backdrop-filter:blur(8px)}
-#arHint{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);z-index:10;background:rgba(0,0,0,.5);color:rgba(255,255,255,.85);font-size:.75rem;letter-spacing:.08em;padding:.5rem 1.1rem;backdrop-filter:blur(6px);white-space:nowrap;pointer-events:none}
-#arLabel{position:absolute;top:1.25rem;left:1.25rem;z-index:10;color:rgba(255,255,255,.7);font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;pointer-events:none}
+#arUI{position:absolute;inset:0;pointer-events:none;z-index:10}
+#arClose{position:absolute;top:1.25rem;right:1.25rem;pointer-events:auto;background:rgba(0,0,0,.55);border:1px solid rgba(255,255,255,.25);color:#fff;font-family:var(--body);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;padding:.55rem 1.2rem;cursor:pointer;backdrop-filter:blur(8px)}
+#arHint{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.6);color:rgba(255,255,255,.9);font-size:.78rem;letter-spacing:.08em;padding:.6rem 1.4rem;backdrop-filter:blur(8px);white-space:nowrap;transition:opacity .5s;border-radius:2px}
+#arStatus{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:#fff;font-size:.85rem;letter-spacing:.1em}
+#arLabel{position:absolute;top:1.4rem;left:1.5rem;color:rgba(255,255,255,.6);font-size:.68rem;letter-spacing:.18em;text-transform:uppercase}
 .btn-ar{display:inline-flex;align-items:center;gap:.45rem;font-family:var(--body);font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text);text-decoration:none;border:1px solid var(--text);padding:.8rem 1.6rem;background:none;cursor:pointer;transition:all .3s}
 .btn-ar:hover{background:var(--text);color:var(--bg)}
 .btn-ar svg{flex-shrink:0}
@@ -154,11 +156,15 @@ img{-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}
 
 <!-- AR Overlay -->
 <div id="arOverlay">
+  <canvas id="arCanvas"></canvas>
   <video id="arVideo" autoplay playsinline muted></video>
-  <div id="arLabel">View in AR</div>
   <img id="arPainting" src="" alt="Painting in AR">
-  <button id="arClose" onclick="closeAR()">&#215; Close</button>
-  <p id="arHint">Drag to position &nbsp;·&nbsp; Pinch or scroll to resize</p>
+  <div id="arUI">
+    <span id="arLabel">View in AR</span>
+    <button id="arClose" onclick="closeAR()">&#215; Close</button>
+    <div id="arHint">Point at a surface and tap to place</div>
+    <div id="arStatus"></div>
+  </div>
 </div>
 
 <script>
@@ -427,111 +433,197 @@ document.addEventListener('selectstart', function(e) {
 (function(){if(!localStorage.getItem('cookieConsent')){document.getElementById('cookieBanner').style.display='block'}})();
 function acceptCookies(){localStorage.setItem('cookieConsent','accepted');document.getElementById('cookieBanner').style.display='none'}
 </script>
-
 <script>
-// ── AR OVERLAY ──────────────────────────────────────────────
-var _arStream = null;
+// ── AR OVERLAY — WebXR Hit-Test + Three.js ────────────────
+var _arStream = null, _arSession = null, _arRenderer = null, _arMode = null;
 
 function openAR(imgSrc) {
   var overlay = document.getElementById('arOverlay');
-  var video   = document.getElementById('arVideo');
-  var painting = document.getElementById('arPainting');
-
-  // Set painting image
-  painting.src = imgSrc;
-  painting.style.width  = '42vmin';
-  painting.style.height = 'auto';
-  painting.style.left   = '50%';
-  painting.style.top    = '42%';
-  painting.style.transform = 'translate(-50%,-50%)';
-
-  // Open overlay
   overlay.classList.add('open');
   document.body.style.overflow = 'hidden';
+  document.getElementById('arStatus').textContent = 'Starting AR…';
+  document.getElementById('arHint').style.opacity = '0';
+  if (navigator.xr) {
+    navigator.xr.isSessionSupported('immersive-ar').then(function(ok) {
+      if (ok) { startWebXRAR(imgSrc); } else { startFallbackAR(imgSrc); }
+    }).catch(function() { startFallbackAR(imgSrc); });
+  } else { startFallbackAR(imgSrc); }
+}
 
-  // Start camera (rear on mobile)
-  navigator.mediaDevices.getUserMedia({video:{facingMode:'environment'}, audio:false})
-    .then(function(stream){
-      _arStream = stream;
-      video.srcObject = stream;
-    })
-    .catch(function(){
-      // Fallback: just show black background with painting
-      document.getElementById('arHint').textContent = 'Camera not available — drag painting to position';
+function _loadScript(url) {
+  return new Promise(function(res, rej) {
+    if (document.querySelector('script[src="'+url+'"]')) { res(); return; }
+    var s = document.createElement('script');
+    s.src = url; s.onload = res; s.onerror = rej;
+    document.head.appendChild(s);
+  });
+}
+
+function startWebXRAR(imgSrc) {
+  _arMode = 'webxr';
+  _loadScript('https://unpkg.com/three@0.160.0/build/three.min.js').then(function() {
+    var canvas = document.getElementById('arCanvas');
+    var renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+    renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.xr.enabled = true;
+    _arRenderer = renderer;
+
+    var scene = new THREE.Scene();
+    var camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.01, 20);
+    scene.add(new THREE.AmbientLight(0xffffff, 1.5));
+
+    // Reticle ring shown on detected surface
+    var reticleGeo = new THREE.RingGeometry(0.07, 0.09, 32).rotateX(-Math.PI / 2);
+    var reticle = new THREE.Mesh(reticleGeo, new THREE.MeshBasicMaterial({ color: 0xffffff, side: THREE.DoubleSide, transparent: true, opacity: 0.85 }));
+    reticle.matrixAutoUpdate = false;
+    reticle.visible = false;
+    scene.add(reticle);
+
+    // Load painting texture and create plane
+    new THREE.TextureLoader().load(imgSrc, function(texture) {
+      var aspect = texture.image.width / texture.image.height;
+      var paintW = 0.5; // 50cm in real world
+      var paintMesh = new THREE.Mesh(
+        new THREE.PlaneGeometry(paintW, paintW / aspect),
+        new THREE.MeshBasicMaterial({ map: texture, side: THREE.DoubleSide })
+      );
+      paintMesh.visible = false;
+      scene.add(paintMesh);
+      var placed = false;
+
+      navigator.xr.requestSession('immersive-ar', {
+        requiredFeatures: ['hit-test'],
+        optionalFeatures: ['dom-overlay'],
+        domOverlay: { root: document.getElementById('arUI') }
+      }).then(function(session) {
+        _arSession = session;
+        renderer.xr.setReferenceSpaceType('local');
+        renderer.xr.setSession(session).then(function() {
+          session.requestReferenceSpace('viewer').then(function(viewerSpace) {
+            session.requestHitTestSource({ space: viewerSpace }).then(function(hitTestSource) {
+              session.requestReferenceSpace('local').then(function(localSpace) {
+                document.getElementById('arStatus').textContent = '';
+                document.getElementById('arHint').textContent = 'Point at a surface — tap to place the painting';
+                document.getElementById('arHint').style.opacity = '1';
+
+                session.addEventListener('select', function() {
+                  if (!placed && reticle.visible) {
+                    paintMesh.position.setFromMatrixPosition(reticle.matrix);
+                    var m = new THREE.Matrix4().fromArray(reticle.matrix.elements);
+                    paintMesh.quaternion.setFromRotationMatrix(m);
+                    paintMesh.rotateX(Math.PI / 2);
+                    paintMesh.visible = true;
+                    placed = true;
+                    document.getElementById('arHint').textContent = 'Painting placed — tap again to reposition';
+                    setTimeout(function() { document.getElementById('arHint').style.opacity = '0'; }, 3000);
+                  } else if (placed) {
+                    placed = false; paintMesh.visible = false;
+                    document.getElementById('arHint').textContent = 'Point at a surface — tap to reposition';
+                    document.getElementById('arHint').style.opacity = '1';
+                  }
+                });
+
+                renderer.setAnimationLoop(function(timestamp, frame) {
+                  if (!frame) return;
+                  var hits = frame.getHitTestResults(hitTestSource);
+                  if (hits.length > 0 && !placed) {
+                    var pose = hits[0].getPose(localSpace);
+                    reticle.visible = true;
+                    reticle.matrix.fromArray(pose.transform.matrix);
+                  } else if (!placed) { reticle.visible = false; }
+                  renderer.render(scene, camera);
+                });
+              });
+            });
+          });
+        });
+        session.addEventListener('end', function() { if (_arMode === 'webxr') closeAR(); });
+      }).catch(function(e) {
+        console.warn('WebXR failed:', e);
+        closeAR(); startFallbackAR(imgSrc);
+      });
     });
+  }).catch(function() { startFallbackAR(imgSrc); });
+}
 
-  // Drag + pinch-to-resize
+function startFallbackAR(imgSrc) {
+  _arMode = 'fallback';
+  var painting = document.getElementById('arPainting');
+  painting.src = imgSrc;
+  painting.style.display = 'block';
+  painting.style.width = '44vmin'; painting.style.height = 'auto';
+  painting.style.left = '50%'; painting.style.top = '44%';
+  painting.style.transform = 'translate(-50%,-50%)';
+  document.getElementById('arStatus').textContent = '';
+  document.getElementById('arHint').textContent = 'Drag to position · Pinch to resize';
+  document.getElementById('arHint').style.opacity = '1';
+  navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' }, audio: false })
+    .then(function(stream) {
+      _arStream = stream;
+      var v = document.getElementById('arVideo');
+      v.srcObject = stream; v.style.display = 'block';
+    })
+    .catch(function() {
+      document.getElementById('arHint').textContent = 'Camera unavailable — drag the painting to position';
+    });
   attachARControls(painting);
 }
 
 function closeAR() {
-  var overlay = document.getElementById('arOverlay');
-  var video   = document.getElementById('arVideo');
-  overlay.classList.remove('open');
+  document.getElementById('arOverlay').classList.remove('open');
   document.body.style.overflow = '';
-  if (_arStream) { _arStream.getTracks().forEach(function(t){t.stop()}); _arStream = null; }
-  video.srcObject = null;
+  if (_arSession) { try { _arSession.end(); } catch(e){} _arSession = null; }
+  if (_arRenderer) { _arRenderer.setAnimationLoop(null); _arRenderer.dispose(); _arRenderer = null; }
+  if (_arStream) { _arStream.getTracks().forEach(function(t){ t.stop(); }); _arStream = null; }
+  var v = document.getElementById('arVideo');
+  v.srcObject = null; v.style.display = 'none';
+  var p = document.getElementById('arPainting');
+  p.style.display = 'none'; p.src = '';
+  document.getElementById('arHint').style.opacity = '1';
+  _arMode = null;
 }
 
 function attachARControls(el) {
-  // Mouse drag
-  var startX, startY, elX, elY, dragging = false;
+  var sx, sy, ex, ey, drag = false;
   el.addEventListener('mousedown', function(e){
-    dragging = true;
-    startX = e.clientX; startY = e.clientY;
+    drag = true; sx = e.clientX; sy = e.clientY;
     var r = el.getBoundingClientRect();
-    elX = r.left + r.width/2; elY = r.top + r.height/2;
-    el.style.transform = 'translate(-50%,-50%)';
+    ex = r.left + r.width/2; ey = r.top + r.height/2;
+    el.style.transform = 'none';
   });
   document.addEventListener('mousemove', function(e){
-    if(!dragging) return;
-    elX += e.clientX - startX; elY += e.clientY - startY;
-    startX = e.clientX; startY = e.clientY;
-    el.style.left = elX+'px'; el.style.top = elY+'px';
+    if(!drag) return;
+    ex += e.clientX-sx; ey += e.clientY-sy; sx = e.clientX; sy = e.clientY;
+    el.style.left = ex+'px'; el.style.top = ey+'px';
   });
-  document.addEventListener('mouseup', function(){ dragging = false; });
-
-  // Scroll wheel resize
+  document.addEventListener('mouseup', function(){ drag = false; });
   el.addEventListener('wheel', function(e){
     e.preventDefault();
-    var w = el.offsetWidth;
-    var newW = Math.max(60, Math.min(window.innerWidth * 0.95, w - e.deltaY * 0.5));
-    el.style.width = newW + 'px';
-  }, {passive: false});
-
-  // Touch drag + pinch resize
-  var lastTouches = null;
-  var pinchStart = null, pinchW = null;
+    el.style.width = Math.max(60, Math.min(window.innerWidth*0.95, el.offsetWidth - e.deltaY*0.5))+'px';
+  }, {passive:false});
+  var lt = null, ps = null, pw = null;
   el.addEventListener('touchstart', function(e){
-    e.preventDefault();
-    lastTouches = e.touches;
-    if(e.touches.length === 2){
-      pinchStart = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY);
-      pinchW = el.offsetWidth;
-    }
+    e.preventDefault(); lt = e.touches;
+    if(e.touches.length===2){ ps = Math.hypot(e.touches[0].clientX-e.touches[1].clientX, e.touches[0].clientY-e.touches[1].clientY); pw = el.offsetWidth; }
   },{passive:false});
   el.addEventListener('touchmove', function(e){
     e.preventDefault();
-    if(e.touches.length === 1 && lastTouches.length === 1){
-      var dx = e.touches[0].clientX - lastTouches[0].clientX;
-      var dy = e.touches[0].clientY - lastTouches[0].clientY;
+    if(e.touches.length===1 && lt.length===1){
       var r = el.getBoundingClientRect();
-      var cx = r.left + r.width/2 + dx;
-      var cy = r.top  + r.height/2 + dy;
-      el.style.left = cx+'px'; el.style.top = cy+'px';
-    } else if(e.touches.length === 2 && pinchStart){
-      var dist = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY);
-      var scale = dist / pinchStart;
-      var newW = Math.max(60, Math.min(window.innerWidth * 0.95, pinchW * scale));
-      el.style.width = newW + 'px';
+      el.style.left = (r.left+r.width/2+e.touches[0].clientX-lt[0].clientX)+'px';
+      el.style.top  = (r.top+r.height/2+e.touches[0].clientY-lt[0].clientY)+'px';
+      el.style.transform = 'none';
+    } else if(e.touches.length===2 && ps){
+      var d = Math.hypot(e.touches[0].clientX-e.touches[1].clientX, e.touches[0].clientY-e.touches[1].clientY);
+      el.style.width = Math.max(60, Math.min(window.innerWidth*0.95, pw*d/ps))+'px';
     }
-    lastTouches = e.touches;
+    lt = e.touches;
   },{passive:false});
-  el.addEventListener('touchend', function(e){ lastTouches = e.touches; pinchStart = null; },{passive:false});
+  el.addEventListener('touchend', function(e){ lt = e.touches; ps = null; },{passive:false});
 }
 
-// Close AR with Escape key
-document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeAR(); });
+document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeAR(); });
 </script>
 </body>
 </html>
