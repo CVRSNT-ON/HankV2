@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Browse and purchase original acrylic paintings by Henk Weijers. Geometric abstraction, landscapes, and expressionist works.">
+<meta name="author" content="Henk Weijers">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<title>Portfolio — Henk Weijers</title>
+<meta property="og:title" content="Portfolio — Henk Weijers">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://henk-weijers-site.netlify.app/portfolio.html">
+<meta property="og:image" content="https://henk-weijers-site.netlify.app/images/portrait.jpg">
+<meta property="og:site_name" content="Henk Weijers — Acrylic Painter">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+@font-face{font-family:'Avenir Next LT Pro';src:url('fonts/AvenirNextLTPro-UltLt.otf') format('opentype');font-weight:300;font-style:normal;font-display:swap}
+@font-face{font-family:'Avenir Next LT Pro';src:url('fonts/AvenirNextLTPro-Regular.otf') format('opentype');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'Avenir Next LT Pro';src:url('fonts/AvenirNextLTPro-It.otf') format('opentype');font-weight:400;font-style:italic;font-display:swap}
+@font-face{font-family:'Avenir Next LT Pro';src:url('fonts/AvenirNextLTPro-Medium.otf') format('opentype');font-weight:500;font-style:normal;font-display:swap}
+@font-face{font-family:'Avenir Next LT Pro';src:url('fonts/AvenirNextLTPro-MediumIt.otf') format('opentype');font-weight:500;font-style:italic;font-display:swap}
+@font-face{font-family:'Avenir Next LT Pro';src:url('fonts/AvenirNextLTPro-Demi.otf') format('opentype');font-weight:600;font-style:normal;font-display:swap}
+</style>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#F5F0E8;--text:#1A1A1A;--text-l:#5A5550;--accent:#2B4A8C;--accent-w:#8C3B2B;--border:#D4CFC5;--card:#FFFDF8;--overlay:rgba(26,26,26,.85);--display:'Cormorant Garamond',Georgia,serif;--body:'Avenir Next LT Pro',-apple-system,sans-serif;--max-w:1400px;--g:clamp(1.25rem,4vw,3rem)}
+html{scroll-behavior:smooth;scroll-padding-top:100px}
+body{font-family:var(--body);background:var(--bg);color:var(--text);line-height:1.6;font-weight:300;-webkit-font-smoothing:antialiased}
+img{-webkit-touch-callout:none;-webkit-user-select:none;user-select:none;pointer-events:none}
+a img,button img,.pf-card img{pointer-events:auto}
+
+/* NAV */
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.25rem var(--g);display:flex;justify-content:space-between;align-items:center;transition:background .4s,backdrop-filter .4s}
+.nav.scrolled{background:rgba(245,240,232,.92);backdrop-filter:blur(12px);box-shadow:0 1px 0 var(--border)}
+.nav-logo{font-family:var(--display);font-size:1.35rem;font-weight:400;letter-spacing:.04em;color:var(--text);text-decoration:none}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{font-size:.78rem;font-weight:400;letter-spacing:.12em;text-transform:uppercase;color:var(--text-l);text-decoration:none;transition:color .3s}
+.nav-links a:hover,.nav-links a.active{color:var(--accent)}
+.hamburger{display:none;background:none;border:none;cursor:pointer;width:28px;height:20px;position:relative;z-index:110}
+.hamburger span{display:block;width:100%;height:1.5px;background:var(--text);position:absolute;left:0;transition:all .3s}
+.hamburger span:nth-child(1){top:0}.hamburger span:nth-child(2){top:50%;transform:translateY(-50%)}.hamburger span:nth-child(3){bottom:0}
+.hamburger.active span:nth-child(1){top:50%;transform:translateY(-50%) rotate(45deg)}.hamburger.active span:nth-child(2){opacity:0}.hamburger.active span:nth-child(3){bottom:50%;transform:translateY(50%) rotate(-45deg)}
+.mobile-menu{display:none;position:fixed;inset:0;z-index:105;background:rgba(245,240,232,.98);backdrop-filter:blur(20px);flex-direction:column;justify-content:center;align-items:center;gap:2.5rem}
+.mobile-menu.open{display:flex}
+.mobile-menu a{font-family:var(--display);font-size:1.8rem;font-weight:300;color:var(--text);text-decoration:none}
+.mobile-close{position:absolute;top:1.25rem;right:var(--g);background:none;border:none;font-size:2rem;color:var(--text);cursor:pointer;z-index:111;line-height:1;padding:.25rem}
+
+section{padding:clamp(3rem,6vw,6rem) var(--g)}
+.section-label{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--text-l);margin-bottom:.75rem}
+.section-title{font-family:var(--display);font-weight:300;font-size:clamp(1.8rem,3.5vw,3rem);line-height:1.15;margin-bottom:1rem}
+.footer{border-top:1px solid var(--border);padding:2rem var(--g);display:flex;justify-content:space-between;align-items:center;max-width:var(--max-w);margin:0 auto;font-size:.78rem;color:var(--text-l);flex-wrap:wrap;gap:.75rem}
+.footer a{color:var(--text-l);text-decoration:none}
+.footer a:hover{color:var(--text)}
+.footer-links{display:flex;gap:1.5rem;flex-wrap:wrap}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* PORTFOLIO GRID */
+.portfolio-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:2.5rem;max-width:var(--max-w);margin:0 auto}
+.pf-card{background:var(--card);border:1px solid var(--border);overflow:hidden;text-decoration:none;color:var(--text);transition:box-shadow .3s,transform .3s;box-shadow:0 6px 20px rgba(0,0,0,.10),0 2px 6px rgba(0,0,0,.06)}
+.pf-card:hover{box-shadow:0 14px 40px rgba(0,0,0,.16),0 4px 10px rgba(0,0,0,.08);transform:translateY(-4px)}
+.filter-btn{font-family:var(--body);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;padding:.45rem 1.1rem;background:none;border:1px solid var(--border);color:var(--text-l);cursor:pointer;transition:all .3s}
+.filter-btn:hover{border-color:var(--text);color:var(--text)}
+.filter-btn.filter-active{background:var(--text);color:var(--bg);border-color:var(--text)}
+.pf-fade{opacity:0;transform:translateY(18px);transition:opacity .5s ease,transform .5s ease}
+.pf-fade.pf-visible{opacity:1;transform:translateY(0)}
+.pf-card img{width:100%;aspect-ratio:1/1;object-fit:cover;display:block}
+.pf-card-info{padding:1rem 1.15rem}
+.pf-card-title{font-family:var(--display);font-size:1.15rem;font-weight:400;font-style:italic;margin-bottom:.25rem}
+.pf-card-meta{font-size:.78rem;color:var(--text-l)}
+.pf-card-price{font-family:var(--display);font-size:1.15rem;font-weight:500;margin-top:.4rem}
+.pf-badge{display:inline-block;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;padding:.2rem .5rem;background:#2B6B3B;color:#fff;margin-bottom:.35rem}
+
+/* ARTWORK DETAIL */
+.artwork-detail{max-width:var(--max-w);margin:0 auto;padding-top:6rem}
+.artwork-layout{display:grid;grid-template-columns:1.2fr 1fr;gap:clamp(2rem,4vw,4rem);align-items:start}
+.artwork-main-img{width:100%;display:block;box-shadow:0 4px 20px rgba(0,0,0,.1)}
+.artwork-info .section-title{margin-bottom:.5rem}
+.artwork-meta{font-size:.88rem;color:var(--text-l);margin-bottom:.35rem}
+.artwork-price{font-family:var(--display);font-size:1.8rem;font-weight:500;margin:1rem 0}
+.artwork-desc{font-size:.95rem;color:var(--text-l);line-height:1.75;margin-bottom:2rem}
+.artwork-actions{display:flex;gap:.75rem;flex-wrap:wrap}
+.btn{display:inline-block;text-align:center;font-family:var(--body);font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;padding:.8rem 2rem;cursor:pointer;text-decoration:none;transition:all .3s}
+.btn-outline{border:1px solid var(--text);background:none;color:var(--text)}
+.btn-outline:hover{background:var(--text);color:var(--bg)}
+.btn-solid{border:none;background:var(--accent);color:#fff}
+.btn-solid:hover{background:#1e3a6e}
+
+/* ROOM VIEW */
+.room-section{margin-top:2.5rem}
+.room-scene{position:relative;width:100%;aspect-ratio:16/10;border-radius:6px;overflow:hidden;background:#E2DDD4}
+.room-wall{position:absolute;inset:0;background:linear-gradient(180deg,#EAE5DC 0%,#E2DDD4 60%,#D6D0C5 60.5%,#C4BCB0 61%,#B8AFA2 100%)}
+.room-baseboard{position:absolute;bottom:0;left:0;right:0;height:5%;background:linear-gradient(180deg,#D6CFC3,#C8C0B3)}
+.room-floor{position:absolute;bottom:0;left:0;right:0;height:38%;background:linear-gradient(180deg,#B8AFA2 0%,#A89E90 100%)}
+.room-shadow{position:absolute;bottom:38%;left:50%;transform:translateX(-50%);width:50%;height:3%;background:radial-gradient(ellipse,rgba(0,0,0,.08) 0%,transparent 70%)}
+.room-furniture{position:absolute;bottom:38%;left:50%;transform:translateX(-50%);width:48%}
+.room-sofa-el{width:100%;aspect-ratio:4/1.6;background:linear-gradient(180deg,#A09080 0%,#8E8070 40%,#7D7060 100%);border-radius:8px 8px 4px 4px;position:relative}
+.room-sofa-el::before{content:'';position:absolute;top:15%;left:8%;right:8%;height:40%;background:linear-gradient(90deg,#B0A090,#A89888,#B0A090);border-radius:4px}
+.room-painting-wrap{position:absolute;left:50%;transform:translateX(-50%);box-shadow:0 6px 24px rgba(0,0,0,.2),0 2px 6px rgba(0,0,0,.1);background:#fff;padding:3px}
+.room-painting-wrap img{width:100%;height:100%;object-fit:cover;display:block}
+.room-caption{text-align:center;margin-top:1rem;font-size:.8rem;color:var(--text-l);font-style:italic}
+
+/* CONTACT */
+.contact-form{display:flex;flex-direction:column;gap:1.15rem;max-width:560px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1.15rem}
+.contact-form label{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text-l);display:block;margin-bottom:.35rem}
+.contact-form input,.contact-form textarea,.contact-form select{width:100%;background:var(--card);border:1px solid var(--border);padding:.8rem 1rem;font-family:var(--body);font-size:.92rem;font-weight:300;color:var(--text);transition:border-color .3s;outline:none}
+.contact-form input:focus,.contact-form textarea:focus,.contact-form select:focus{border-color:var(--accent)}
+.contact-form textarea{resize:vertical;min-height:110px}
+.contact-form button{align-self:flex-start;background:var(--text);color:var(--bg);border:none;font-family:var(--body);font-size:.78rem;letter-spacing:.15em;text-transform:uppercase;padding:.9rem 2.5rem;cursor:pointer;transition:background .3s}
+.contact-form button:hover{background:var(--accent)}
+
+/* HOME SPECIFIC */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:6rem var(--g) 4rem;text-align:center;position:relative}
+.hero-overline{font-size:.72rem;letter-spacing:.25em;text-transform:uppercase;color:var(--text-l);margin-bottom:1.25rem;opacity:0;animation:fadeUp .8s ease forwards .2s}
+.hero h1{font-family:var(--display);font-weight:300;font-size:clamp(3rem,8vw,7rem);line-height:1.05;letter-spacing:-.02em;margin-bottom:1.25rem;opacity:0;animation:fadeUp .8s ease forwards .4s}
+.hero h1 em{font-style:italic}
+.hero-sub{font-family:var(--display);font-weight:300;font-style:italic;font-size:clamp(1rem,2.2vw,1.4rem);color:var(--text-l);max-width:640px;line-height:1.5;margin-bottom:2rem;opacity:0;animation:fadeUp .8s ease forwards .6s}
+.hero-cta{display:inline-block;font-size:.78rem;letter-spacing:.15em;text-transform:uppercase;font-weight:400;color:var(--text);text-decoration:none;border:1px solid var(--text);padding:.85rem 2.2rem;transition:background .3s,color .3s;opacity:0;animation:fadeUp .8s ease forwards .8s}
+.hero-cta:hover{background:var(--text);color:var(--bg)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+.home-works-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.75rem;max-width:var(--max-w);margin:0 auto}
+.home-works-grid img{width:100%;aspect-ratio:1/1;object-fit:cover;display:block;transition:transform .5s}
+.home-works-grid a:hover img{transform:scale(1.04)}
+.about-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:clamp(2rem,5vw,4rem);align-items:center;max-width:var(--max-w);margin:0 auto}
+.about-portrait{aspect-ratio:1/1;overflow:hidden}
+.about-portrait img{width:100%;height:100%;object-fit:cover}
+.about-text p{font-size:1rem;line-height:1.75;color:var(--text-l);margin-bottom:1rem;max-width:520px}
+.process-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;max-width:var(--max-w);margin:2rem auto 0}
+.process-card{border-top:1px solid var(--border);padding-top:1.25rem}
+.process-card h3{font-family:var(--display);font-weight:400;font-size:1.25rem;margin-bottom:.5rem}
+.process-card p{font-size:.88rem;color:var(--text-l);line-height:1.7}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,4vw,4rem);max-width:var(--max-w);margin:2rem auto 0}
+.contact-info p{font-size:.95rem;color:var(--text-l);line-height:1.7;margin-bottom:1.25rem;max-width:420px}
+.contact-links a{display:block;font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);text-decoration:none;margin-bottom:.5rem;transition:color .3s}
+.contact-links a:hover{color:var(--accent-w)}
+
+@media(max-width:1024px){.process-strip{grid-template-columns:1fr}}
+@media(max-width:768px){
+  .nav-links{display:none}.hamburger{display:block}
+  .about-grid,.contact-grid,.artwork-layout{grid-template-columns:1fr}
+  .about-portrait{max-width:360px}
+  .form-row{grid-template-columns:1fr}
+  .footer{flex-direction:column;gap:.75rem;text-align:center}
+  .portfolio-grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:1rem}
+  .home-works-grid{grid-template-columns:repeat(auto-fill,minmax(140px,1fr))
+  .critic-quote{font-size:.85rem!important;line-height:1.7!important}
+  .critic-body{font-size:.8rem!important;line-height:1.65!important}
+}
+</style>
+<script type='text/javascript' src='https://api.netlify.com/ZvdYKVHtw1CE_MYkLanlXEg0PnR3kwjRNS_i2AwWg6-7OOy7kz9EHBfemo91qLnkIDwy1woGtRWPpxEu7FS0bR2vfCLlv3BPXL_e2PtIFaEBRdnHbXSPP9npYPbKtm4dDuB8Nq-vPIn3jQm-hUO1WQO-lQarEU45McyaE1INxdgFKmk0-Ee5c_fnvCl6YcKep6Vkq9cdBJm0ufD13OhKI4crDFmGNm8f6CU4CBPeG_-iFZUHXRuoh1CfpWCRP4Kk6316ZGddmNdwLin0BM0Ru8kZ4xXu3QllVPY0sTJKu_v8juYivvP98Gx4zX8DIaYXcO0Nbzb6kbVSn1vHk-R1kIrqLpt84lHS_9QeAUk9p1PS8xwRx58r5tPd_ZnFWsBOB33GJJbIZN58PT6SM4JCBh3Jc8hdHUkrSN1BsfmKu_IeUWHvS4vT_dST4Roweu6VLsAnOpI4XSLGIs6XUr-cOnJISYjq-qhtmwYDiwW4vqckkmGpKz9k7_wNR1ilmOorRCpHHC-Bzm6qtdEGcOizkxVrKQ'></script><script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+</head>
+<body>
+<nav class="nav" id="nav">
+  <a href="index.html" class="nav-logo">Henk Weijers</a>
+  <ul class="nav-links">
+    <li><a href="index.html#about" >About</a></li>
+    <li><a href="portfolio.html" class=active>Portfolio</a></li>
+    <li><a href="index.html#approach">Approach</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" id="mobileClose" aria-label="Close menu">&times;</button>
+  <a href="index.html#about" onclick="closeMobile()">About</a>
+  <a href="portfolio.html" onclick="closeMobile()">Portfolio</a>
+  <a href="index.html#approach" onclick="closeMobile()">Approach</a>
+  <a href="index.html#contact" onclick="closeMobile()">Contact</a>
+</div>
+
+<section style="padding-top:6rem">
+  <div style="max-width:var(--max-w);margin:0 auto 2rem" class="reveal">
+    <p class="section-label">Original Paintings for Sale</p>
+    <h2 class="section-title">Portfolio</h2>
+    <p style="color:var(--text-l);font-size:.95rem;max-width:560px;line-height:1.7">Each painting is a unique original acrylic on canvas, ready to hang. Click any work to see full details, dimensions, and a room preview.</p>
+    <div id="filterBar" style="display:flex;gap:.5rem;flex-wrap:wrap;margin-top:1.25rem"></div>
+  </div>
+  <!-- Critic text — hardcoded -->
+  <div style="max-width:var(--max-w);margin:0 auto 2.5rem" class="reveal">
+    <div style="border-left:3px solid var(--accent);padding:.9rem 1.6rem;background:var(--card)">
+      <p class="critic-quote" style="font-family:var(--display);font-size:1.05rem;font-weight:300;font-style:italic;line-height:1.85;color:var(--text-l);margin-bottom:.9rem">&ldquo;Color is a power which directly influences the soul.&rdquo; &mdash; Wassily Kandinsky</p>
+      <p class="critic-body" style="font-size:.93rem;line-height:1.8;color:var(--text-l);margin-bottom:.6rem">In Henk Weijers&rsquo; practice, color becomes emotional architecture. His painting moves effortlessly between geometric abstraction, landscape, and visual memory, building compositions in which formal rigor and poetic sensitivity coexist with rare elegance. Grids, partitions, skylines, books, bottles, and views thus become part of an essential and sophisticated pictorial language, capable of transforming personal experience into a universal image.</p>
+      <p class="critic-body" style="font-size:.93rem;line-height:1.8;color:var(--text-l);margin-bottom:.9rem">Weijers&rsquo; works are distinguished by a quiet yet intense presence: layered surfaces, measured chromatic balances, and subtle tensions between order and freedom. Each piece invites a slow, cultivated way of looking, in which painting does not simply describe the world, but filters it through memory, rhythm, and contemplation. It is precisely in this synthesis of compositional discipline, emotional depth, and chromatic refinement that his work finds its most authentic and distinctive voice.</p>
+      <p style="font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--accent)">Ludovica Dagna &mdash; Art Curator</p>
+    </div>
+  </div>
+  <!-- Logistical info -->
+  <div style="max-width:var(--max-w);margin:0 auto 2.5rem" class="reveal">
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1rem">
+      <div style="display:flex;align-items:flex-start;gap:.75rem;padding:1rem;background:var(--card);border:1px solid var(--border)">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:.1rem"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        <div><p style="font-size:.78rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;margin-bottom:.2rem">Invoice Included</p><p style="font-size:.8rem;color:var(--text-l);line-height:1.5">Official invoice issued with all shipping costs itemised.</p></div>
+      </div>
+      <div style="display:flex;align-items:flex-start;gap:.75rem;padding:1rem;background:var(--card);border:1px solid var(--border)">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:.1rem"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 4v3h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+        <div><p style="font-size:.78rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;margin-bottom:.2rem">Secure Shipping</p><p style="font-size:.8rem;color:var(--text-l);line-height:1.5">Dispatched via reliable courier with professional rigid packaging.</p></div>
+      </div>
+      <div style="display:flex;align-items:flex-start;gap:.75rem;padding:1rem;background:var(--card);border:1px solid var(--border)">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:.1rem"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <div><p style="font-size:.78rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;margin-bottom:.2rem">Certificate of Authenticity</p><p style="font-size:.8rem;color:var(--text-l);line-height:1.5">Each work ships with a signed certificate of authenticity.</p></div>
+      </div>
+      <div style="display:flex;align-items:flex-start;gap:.75rem;padding:1rem;background:var(--card);border:1px solid var(--border)">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:.1rem"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+        <div><p style="font-size:.78rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;margin-bottom:.2rem">Original Works Only</p><p style="font-size:.8rem;color:var(--text-l);line-height:1.5">Only unique original paintings sold — no prints or reproductions.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="portfolio-grid" id="portfolioGrid">
+    <!-- Populated dynamically from works.json -->
+  </div>
+</section>
+
+<script>
+(function(){
+  var allWorks = [];
+  var activeFilter = 'All';
+
+  fetch('works.json').then(function(r){return r.json()}).then(function(works){
+    allWorks = works.sort(function(a,b){return (b.order||0)-(a.order||0)});
+    buildFilters();
+    renderPortfolio();
+  }).catch(function(e){ console.warn('Could not load works.json', e); });
+
+  function buildFilters(){
+    var cats = ['All'];
+    allWorks.filter(function(w){return w.status !== 'Sold'}).forEach(function(w){ if(w.category && cats.indexOf(w.category)===-1) cats.push(w.category); });
+    var bar = document.getElementById('filterBar');
+    if(!bar) return;
+    bar.innerHTML = cats.map(function(c){
+      var cls = c === activeFilter ? 'filter-btn filter-active' : 'filter-btn';
+      return '<button class="'+cls+'" data-cat="'+c+'">'+c+'</button>';
+    }).join('');
+    bar.querySelectorAll('.filter-btn').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        activeFilter = this.getAttribute('data-cat');
+        bar.querySelectorAll('.filter-btn').forEach(function(b){b.classList.remove('filter-active')});
+        this.classList.add('filter-active');
+        renderPortfolio();
+      });
+    });
+  }
+
+  function renderPortfolio(){
+    // Hide sold works from public portfolio
+    var visible = allWorks.filter(function(w){return w.status !== 'Sold'});
+    var filtered = activeFilter === 'All' ? visible : visible.filter(function(w){return w.category === activeFilter});
+    var grid = document.getElementById('portfolioGrid');
+    if(!grid) return;
+    var html = '';
+    for(var i=0; i<filtered.length; i++){
+      var w = filtered[i];
+      var badgeColor = w.status==='Available'?'#2B6B3B':w.status==='Sold'?'#9B2C2C':'#8B6914';
+      html += '<a href="works/view?id='+encodeURIComponent(w.id)+'" class="pf-card pf-fade">'
+        + '<img src="'+w.image+'" alt="'+w.title.replace(/"/g,'&quot;')+'" loading="lazy">'
+        + '<div class="pf-card-info">'
+        + '<span class="pf-badge" style="background:'+badgeColor+'">'+w.status+'</span>'
+        + '<h3 class="pf-card-title">'+w.title+'</h3>'
+        + '<p class="pf-card-meta">'+w.medium+' &middot; '+w.width+' &times; '+w.height+' in</p>'
+        + '<p class="pf-card-price">&euro;'+w.price+'</p>'
+        + '</div></a>';
+    }
+    grid.innerHTML = html;
+    // CSS stagger: add pf-visible with small delay per card
+    var pfCards = grid.querySelectorAll('.pf-fade');
+    pfCards.forEach(function(el, idx){
+      setTimeout(function(){ el.classList.add('pf-visible'); }, 60 + idx * 60);
+    });
+  }
+})();
+</script>
+
+<footer class="footer">
+  <span>&copy; 2026 Henk Weijers. All rights reserved.</span>
+  <div class="footer-links">
+    <a href="privacy-policy.html">Privacy</a>
+    <a href="cookie-policy.html">Cookies</a>
+    <a href="https://www.instagram.com/henk.weijers_artist" target="_blank" rel="noopener"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:.35rem"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>Instagram</a>
+  </div>
+</footer>
+<script>
+var nav=document.getElementById("nav");
+if(nav){window.addEventListener("scroll",function(){nav.classList.toggle("scrolled",window.scrollY>60)})}
+var hb=document.getElementById("hamburger"),mm=document.getElementById("mobileMenu"),mc=document.getElementById("mobileClose");
+if(hb){hb.addEventListener("click",function(){hb.classList.toggle("active");mm.classList.toggle("open");document.body.style.overflow=mm.classList.contains("open")?"hidden":""})}
+if(mc){mc.addEventListener("click",function(){closeMobile()})}
+function closeMobile(){if(hb){hb.classList.remove("active");mm.classList.remove("open");document.body.style.overflow=""}}
+var reveals=document.querySelectorAll(".reveal");
+var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add("visible");obs.unobserve(e.target)}})},{threshold:.1});
+reveals.forEach(function(el){obs.observe(el)});
+</script>
+
+<!-- Cookie Banner -->
+<div id="cookieBanner" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;background:rgba(26,26,26,.95);backdrop-filter:blur(10px);padding:1rem clamp(1.25rem,4vw,3rem);color:#F5F0E8">
+  <div style="max-width:1400px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap">
+    <p style="font-family:'Avenir Next LT Pro',-apple-system,sans-serif;font-size:.82rem;font-weight:300;line-height:1.6;margin:0;flex:1;min-width:280px">We use essential cookies to ensure the website functions properly. No tracking or advertising cookies are used. <a href="cookie-policy.html" style="color:#7B9FD4;text-decoration:underline">Cookie Policy</a> · <a href="privacy-policy.html" style="color:#7B9FD4;text-decoration:underline">Privacy Policy</a></p>
+    <button onclick="acceptCookies()" style="background:#F5F0E8;color:#1A1A1A;border:none;font-family:'Avenir Next LT Pro',-apple-system,sans-serif;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;padding:.6rem 1.5rem;cursor:pointer;white-space:nowrap;font-weight:400;transition:background .3s">Accept</button>
+  </div>
+</div>
+<script>
+(function(){if(!localStorage.getItem('cookieConsent')){document.getElementById('cookieBanner').style.display='block'}})();
+function acceptCookies(){localStorage.setItem('cookieConsent','accepted');document.getElementById('cookieBanner').style.display='none'}
+</script>
+
+<script>
+  if (window.netlifyIdentity) {
+    window.netlifyIdentity.on("init", function(user) {
+      if (!user) { window.netlifyIdentity.on("login", function() { document.location.href = "/admin/"; }); }
+    });
+  }
+</script>
+<script src="js/gsap.min.js"></script>
+<script>
+// Image protection — disable right-click, drag, long-press save
+document.addEventListener('contextmenu', function(e) {
+  if (e.target.tagName === 'IMG') { e.preventDefault(); return false; }
+});
+document.addEventListener('dragstart', function(e) {
+  if (e.target.tagName === 'IMG') { e.preventDefault(); return false; }
+});
+document.addEventListener('selectstart', function(e) {
+  if (e.target.tagName === 'IMG') { e.preventDefault(); return false; }
+});
+</script>
+</body>
+</html>

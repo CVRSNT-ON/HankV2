@@ -1,0 +1,1669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Admin — Henk Weijers</title>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<script type='text/javascript' src='https://api.netlify.com/EvJ_3bzG-tut6PcVRP2idqNZ95GzEXu70OVDaT-l1V6844hoIvfywyKEJZ9mtXJrxpWFYnlNUvCDuVDmfTPE3YhhtYcM7VTUEmtNe5_wUai1rz_BeVWfBCQ5612108CV8hoEpF6c5icdzhpYSx6nBhdkIz7HnQSVZ74acqvfqgpvbiPC095Y4RFsBShgTDRXyvGQEqsY2zY7me-uXmub5Ds4DqBQpx-M0fZ5lqr4BRCUb7R-6-bp8JxwSDBigMPxiNBT1K-alSOH6GO30lbX4ubVqgL_Cy3tEqMLrlucjVfu5j-vEKd42SR-wjKRLb4Ill_0eiyOu4KPEerzX-dPfRAk8Uy4EWCDU2_OScaTqSZYp1luFUSn3xkax7gr52FobWk75ObEuQtEn6gaaqkCFPbHh_hO6uQaUVzKcgNcMzaX96oJLMGWYc_OInAbHtfGnj21dlkuQIVSFX8eIRMAGnmYOK4O9NwUqTtTWmqbZonjvSfXbJBpTjFIqThT-61Q8UKCOdfWo_u-2mcFmExRgbEuobei'></script><script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#F5F0E8;--text:#1A1A1A;--text-l:#5A5550;--accent:#2B4A8C;--accent-w:#8C3B2B;--border:#D4CFC5;--card:#FFFDF8;--danger:#9B2C2C;--success:#2B6B3B;--display:'Cormorant Garamond',Georgia,serif;--body:'DM Sans',-apple-system,sans-serif;--max-w:1200px;--g:clamp(1.25rem,4vw,2rem)}
+html{scroll-behavior:smooth}
+body{font-family:var(--body);background:var(--bg);color:var(--text);line-height:1.6;font-weight:300;-webkit-font-smoothing:antialiased}
+.admin-nav{position:sticky;top:0;z-index:100;background:rgba(245,240,232,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:.85rem var(--g);display:flex;justify-content:space-between;align-items:center}
+.admin-nav-left{display:flex;align-items:center;gap:1rem}
+.admin-nav-logo{font-family:var(--display);font-size:1.2rem;font-weight:400;letter-spacing:.04em;color:var(--text);text-decoration:none}
+.admin-nav-badge{font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;padding:.2rem .5rem;background:var(--accent);color:#fff;border-radius:2px}
+.admin-nav-right{display:flex;align-items:center;gap:1rem}
+.admin-nav a{font-size:.78rem;color:var(--text-l);text-decoration:none;transition:color .3s}
+.admin-nav a:hover{color:var(--accent)}
+#loginScreen{min-height:100vh;display:none;flex-direction:column;justify-content:center;align-items:center;padding:2rem;text-align:center}
+#loginScreen h1{font-family:var(--display);font-weight:300;font-size:2.5rem;margin-bottom:.5rem}
+#loginScreen p{color:var(--text-l);margin-bottom:2rem;font-size:.92rem}
+.login-btn{background:var(--text);color:var(--bg);border:none;font-family:var(--body);font-size:.78rem;letter-spacing:.15em;text-transform:uppercase;padding:.9rem 2.5rem;cursor:pointer;transition:background .3s}
+.login-btn:hover{background:var(--accent)}
+#adminPanel{display:none}
+.admin-content{max-width:var(--max-w);margin:0 auto;padding:2rem var(--g)}
+.admin-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:2rem;flex-wrap:wrap;gap:1rem}
+.admin-header h2{font-family:var(--display);font-weight:300;font-size:1.8rem}
+.btn-sm{font-family:var(--body);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;padding:.5rem 1.2rem;cursor:pointer;transition:all .3s;border:none;border-radius:0}
+.btn-primary{background:var(--accent);color:#fff}.btn-primary:hover{background:#1e3a6e}
+.btn-outline-sm{background:none;border:1px solid var(--border);color:var(--text)}.btn-outline-sm:hover{border-color:var(--text)}
+.btn-danger{background:var(--danger);color:#fff}.btn-danger:hover{background:#7a2222}
+.btn-success{background:var(--success);color:#fff}.btn-success:hover{background:#1e5a2e}
+.btn-sm:disabled{opacity:.5;cursor:not-allowed}
+.admin-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;margin-bottom:2.5rem}
+.stat-card{background:var(--card);border:1px solid var(--border);padding:1.25rem;text-align:center}
+.stat-number{font-family:var(--display);font-size:2rem;font-weight:500;color:var(--accent)}
+.stat-label{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text-l);margin-top:.25rem}
+.works-table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--border)}
+.works-table th{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text-l);text-align:left;padding:.75rem 1rem;border-bottom:2px solid var(--border);background:var(--bg)}
+.works-table td{padding:.6rem 1rem;border-bottom:1px solid var(--border);font-size:.88rem;vertical-align:middle}
+.works-table tr:hover td{background:rgba(43,74,140,.03)}
+.works-table img.thumb-sm{width:50px;height:50px;object-fit:cover;display:block;border:1px solid var(--border);transition:transform .2s,box-shadow .2s;cursor:zoom-in}
+.thumb-popup{display:none;position:fixed;z-index:500;width:220px;height:220px;object-fit:cover;border:2px solid var(--border);box-shadow:0 12px 40px rgba(0,0,0,.25);pointer-events:none}
+
+.status-badge{display:inline-block;font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;padding:.15rem .45rem;border-radius:2px}
+.status-available{background:#2B6B3B;color:#fff}
+.status-sold{background:var(--danger);color:#fff}
+.status-reserved{background:#8B6914;color:#fff}
+.status-select{font-family:var(--body);font-size:.65rem;letter-spacing:.06em;text-transform:uppercase;padding:.2rem .35rem;border-radius:2px;border:none;cursor:pointer;font-weight:500;outline:none;appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='5'%3E%3Cpath d='M0 0l4 5 4-5z' fill='%23fff'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 4px center;padding-right:16px}
+.status-select.sel-available{background:#2B6B3B;color:#fff}
+.status-select.sel-sold{background:var(--danger);color:#fff}
+.status-select.sel-reserved{background:#8B6914;color:#fff}
+.table-actions{display:flex;gap:.4rem}
+.table-wrap{overflow-x:auto;margin-bottom:2rem}
+.star{cursor:pointer;font-size:1.2rem;transition:color .2s;background:none;border:none;padding:0}
+.star.on{color:#D4A017}.star.off{color:var(--border)}
+.drag-handle{cursor:grab;color:var(--border);font-size:1.1rem;user-select:none;transition:color .2s;padding:0 .25rem}
+.drag-handle:hover{color:var(--text)}
+.drag-handle:active{cursor:grabbing}
+tr.dragging{opacity:.4;background:rgba(43,74,140,.05)}
+tr.drag-over td{border-top:2px solid var(--accent)}
+tr.drag-below td{border-bottom:2px solid var(--accent)}
+.modal-overlay{display:none;position:fixed;inset:0;z-index:200;background:rgba(26,26,26,.6);backdrop-filter:blur(4px);justify-content:center;align-items:flex-start;padding:2rem;overflow-y:auto}
+.modal-overlay.open{display:flex}
+.modal{background:var(--bg);border:1px solid var(--border);width:100%;max-width:680px;margin:2rem auto;padding:0;box-shadow:0 20px 60px rgba(0,0,0,.15)}
+.modal-header{display:flex;justify-content:space-between;align-items:center;padding:1.25rem 1.5rem;border-bottom:1px solid var(--border)}
+.modal-header h3{font-family:var(--display);font-weight:400;font-size:1.3rem}
+.modal-close{background:none;border:none;font-size:1.4rem;cursor:pointer;color:var(--text-l);transition:color .3s;line-height:1}
+.modal-close:hover{color:var(--text)}
+.modal-body{padding:1.5rem}
+.modal-footer{padding:1rem 1.5rem;border-top:1px solid var(--border);display:flex;justify-content:flex-end;gap:.5rem}
+.form-group{margin-bottom:1.15rem}
+.form-group label{display:block;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text-l);margin-bottom:.35rem}
+.form-group input,.form-group textarea,.form-group select{width:100%;background:var(--card);border:1px solid var(--border);padding:.7rem .9rem;font-family:var(--body);font-size:.88rem;font-weight:300;color:var(--text);transition:border-color .3s;outline:none}
+.form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:var(--accent)}
+.form-group textarea{resize:vertical;min-height:100px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.form-row-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem}
+.img-preview{max-width:200px;max-height:200px;object-fit:cover;border:1px solid var(--border);margin-top:.5rem;display:none}
+.img-upload-area{border:2px dashed var(--border);padding:2rem;text-align:center;cursor:pointer;transition:border-color .3s;position:relative}
+.img-upload-area:hover{border-color:var(--accent)}
+.img-upload-area input[type="file"]{position:absolute;inset:0;opacity:0;cursor:pointer}
+.img-upload-area p{font-size:.82rem;color:var(--text-l)}
+.toast{position:fixed;bottom:2rem;right:2rem;z-index:300;background:var(--text);color:var(--bg);padding:.85rem 1.5rem;font-size:.82rem;opacity:0;transform:translateY(10px);transition:all .3s;pointer-events:none;max-width:400px}
+.toast.show{opacity:1;transform:translateY(0)}
+.toast.error{background:var(--danger)}
+.toast.success{background:var(--success)}
+.saving-overlay{display:none;position:fixed;inset:0;z-index:250;background:rgba(245,240,232,.85);backdrop-filter:blur(6px);justify-content:center;align-items:center;flex-direction:column;gap:1rem}
+.saving-overlay.active{display:flex}
+.saving-overlay p{font-size:1rem;color:var(--text)}
+.spinner{width:36px;height:36px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(43,107,59,.4)}50%{box-shadow:0 0 0 8px rgba(43,107,59,0)}}
+.btn-publish-pulse{animation:pulse 2s infinite}
+.sync-status{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;padding:.2rem .6rem;border-radius:2px;margin-left:.5rem}
+.sync-saved{background:var(--success);color:#fff}
+.sync-unsaved{background:#8B6914;color:#fff}
+.sync-error{background:var(--danger);color:#fff}
+@media(max-width:768px){
+  .form-row,.form-row-3{grid-template-columns:1fr}
+  .admin-stats{grid-template-columns:1fr 1fr}
+  .works-table th:nth-child(1),.works-table td:nth-child(1),
+  .works-table th:nth-child(5),.works-table td:nth-child(5),
+  .works-table th:nth-child(6),.works-table td:nth-child(6),
+  .works-table th:nth-child(8),.works-table td:nth-child(8){display:none}
+  .admin-header{flex-direction:column;align-items:flex-start}
+  .admin-nav{flex-wrap:wrap;gap:.5rem}
+  .admin-nav-right{flex-wrap:wrap}
+}
+@media(max-width:480px){
+  .admin-stats{grid-template-columns:1fr}
+  .works-table th:nth-child(4),.works-table td:nth-child(4){display:none}
+}
+.cat-tag{display:inline-flex;align-items:center;gap:.35rem;font-size:.72rem;letter-spacing:.06em;padding:.3rem .6rem;background:var(--bg);border:1px solid var(--border);color:var(--text);border-radius:2px}
+.cat-tag .cat-count{color:var(--text-l);font-size:.65rem}
+.cat-tag .cat-remove{background:none;border:none;color:var(--text-l);cursor:pointer;font-size:.9rem;line-height:1;padding:0 0 0 .2rem;transition:color .2s}
+.cat-tag .cat-remove:hover{color:var(--danger)}
+.room-pos-editor{position:relative;width:100%;aspect-ratio:16/10;border-radius:6px;overflow:hidden;background:#e0ddd6;cursor:crosshair;margin-top:.5rem;border:2px solid var(--border)}
+.room-pos-editor img.rpe-bg{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none}
+.room-pos-editor .rpe-painting{position:absolute;box-shadow:0 4px 16px rgba(0,0,0,.25);background:#fff;padding:2px;cursor:move;user-select:none;touch-action:none;transform-origin:center center}
+.room-pos-editor .rpe-painting img{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none}
+.room-pos-editor .rpe-resize{position:absolute;bottom:-5px;right:-5px;width:14px;height:14px;background:var(--accent);border:2px solid #fff;cursor:nwse-resize;border-radius:2px;z-index:5}
+.room-pos-editor .rpe-crosshair{position:absolute;pointer-events:none;z-index:3}
+.room-pos-editor .rpe-crosshair-h{position:absolute;left:0;right:0;height:1px;background:rgba(43,74,140,.3);pointer-events:none}
+.room-pos-editor .rpe-crosshair-v{position:absolute;top:0;bottom:0;width:1px;background:rgba(43,74,140,.3);pointer-events:none}
+.room-pos-coords{font-size:.68rem;color:var(--text-l);margin-top:.35rem;font-family:monospace}
+.rpe-rotation-btns{display:flex;gap:.35rem;margin-top:.5rem;align-items:center}
+.rpe-rotation-btns label{font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-l);margin-right:.25rem}
+.rpe-rot-btn{background:none;border:1px solid var(--border);color:var(--text);font-family:var(--body);font-size:.7rem;padding:.3rem .7rem;cursor:pointer;border-radius:2px;transition:all .2s;letter-spacing:.05em}
+.rpe-rot-btn:hover{border-color:var(--accent);color:var(--accent)}
+.rpe-rot-btn.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+</style>
+</head>
+<body>
+
+<div id="loginScreen">
+  <h1>Admin</h1>
+  <p>Sign in to manage your artworks</p>
+  <p style="font-size:.78rem;color:var(--text-l);margin-top:-.5rem;margin-bottom:2rem">New accounts are created by invitation only.</p>
+  <button class="login-btn" id="loginBtn">Sign In</button>
+</div>
+
+<div id="adminPanel">
+  <nav class="admin-nav">
+    <div class="admin-nav-left">
+      <a href="/" class="admin-nav-logo">Henk Weijers</a>
+      <span class="admin-nav-badge">Admin</span>
+      <span class="sync-status sync-saved" id="syncStatus">Synced</span>
+    </div>
+    <div class="admin-nav-right">
+      <a href="/" target="_blank">View Site</a>
+      <span id="userEmail" style="font-size:.78rem;color:var(--text-l)"></span>
+      <button class="btn-sm btn-outline-sm" onclick="logout()">Sign Out</button>
+    </div>
+  </nav>
+  <div class="admin-content">
+    <div class="admin-header">
+      <h2>Artwork Management</h2>
+      <div style="display:flex;gap:.5rem;flex-wrap:wrap;align-items:center">
+        <button class="btn-sm btn-primary" onclick="openAddModal()">+ Add Artwork</button>
+        <button class="btn-sm btn-outline-sm" onclick="exportCSV()">&#8595; Export CSV</button>
+        <button class="btn-sm btn-success" id="publishBtn" onclick="publishChanges()" style="display:none">&#9650; Publish Changes <span id="changeCount"></span></button>
+      </div>
+    </div>
+    <div class="admin-stats" id="statsGrid"></div>
+
+    <!-- CATEGORY MANAGEMENT -->
+    <div style="background:var(--card);border:1px solid var(--border);padding:1.25rem;margin-bottom:1.5rem">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.75rem">
+        <h3 style="font-family:var(--display);font-weight:400;font-size:1.1rem">Categories</h3>
+      </div>
+      <div id="categoryList" style="display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.75rem"></div>
+      <div style="display:flex;gap:.4rem;max-width:360px">
+        <input type="text" id="mainNewCatInput" placeholder="New category name..." style="flex:1;padding:.45rem .7rem;font-size:.82rem;border:1px solid var(--border);background:var(--bg);font-family:var(--body);outline:none">
+        <button type="button" class="btn-sm btn-primary" style="padding:.45rem .8rem;font-size:.65rem" onclick="addCategoryFromMain()">+ Add</button>
+      </div>
+    </div>
+
+    <div style="margin-bottom:1rem">
+      <input type="text" id="searchInput" placeholder="Search artworks..." oninput="renderTable()" style="width:100%;max-width:320px;background:var(--card);border:1px solid var(--border);padding:.55rem .9rem;font-family:var(--body);font-size:.85rem;font-weight:300;color:var(--text);outline:none">
+    </div>
+    <div class="table-wrap">
+      <table class="works-table">
+        <thead><tr>
+          <th style="width:30px"></th><th></th><th>Title</th><th>Category</th><th>Dimensions</th><th>Price</th><th>Status</th><th>Home</th><th>Actions</th>
+        </tr></thead>
+        <tbody id="worksTableBody"></tbody>
+      </table>
+    </div>
+
+    <!-- ====================================================
+         EXHIBITIONS SECTION
+    ==================================================== -->
+    <div style="margin-top:2.5rem;border-top:2px solid var(--border);padding-top:2rem">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem;flex-wrap:wrap;gap:.75rem">
+        <div style="display:flex;align-items:center;gap:.75rem"><h2 style="font-family:var(--display);font-weight:300;font-size:1.6rem">Exhibitions</h2><span id="exhVisibleBadge" style="font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;padding:.2rem .5rem;border-radius:2px"></span></div>
+        <div style="display:flex;gap:.5rem;align-items:center"><label style="font-size:.78rem;color:var(--text-l);display:flex;align-items:center;gap:.4rem;cursor:pointer"><input type="checkbox" id="exhVisibleToggle" onchange="toggleExhibitionsVisibility()" style="accent-color:var(--accent);width:auto"> Show on site</label><button class="btn-sm btn-primary" onclick="openExhModal()">+ Add Exhibition</button></div>
+      </div>
+      <div id="exhibitionsAdminList" style="display:grid;gap:.75rem"></div>
+    </div>
+
+
+
+  </div><!-- /admin-content -->
+</div><!-- /adminPanel -->
+
+<!-- EXHIBITION MODAL -->
+<div class="modal-overlay" id="exhModal">
+  <div class="modal" style="max-width:500px">
+    <div class="modal-header">
+      <h3 id="exhModalTitle">Add Exhibition</h3>
+      <button class="modal-close" onclick="closeExhModal()">&times;</button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="exhEditId">
+      <div class="form-group">
+        <label for="exhName">Exhibition Name</label>
+        <input type="text" id="exhName" placeholder="e.g. Margini di Pagina">
+      </div>
+      <div class="form-group">
+        <label for="exhVenue">Venue &amp; Location</label>
+        <input type="text" id="exhVenue" placeholder="e.g. Spazio Guido Tommasi Editore, Milano, Italy">
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="exhDateFrom">From</label>
+          <input type="date" id="exhDateFrom">
+        </div>
+        <div class="form-group">
+          <label for="exhDateTo">To</label>
+          <input type="date" id="exhDateTo">
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-sm btn-outline-sm" onclick="closeExhModal()">Cancel</button>
+      <button class="btn-sm btn-primary" onclick="saveExhibition()">Save Exhibition</button>
+    </div>
+  </div>
+</div>
+
+<!-- ADD / EDIT MODAL -->
+<div class="modal-overlay" id="artworkModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 id="modalTitle">Add Artwork</h3>
+      <button class="modal-close" onclick="closeModal()">&times;</button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="editId">
+      <div class="form-group">
+        <label for="artTitle">Title</label>
+        <input type="text" id="artTitle" placeholder="e.g. Ruby My Dear">
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="artCategory">Category</label>
+          <select id="artCategory"></select>
+          <div style="display:flex;gap:.4rem;margin-top:.3rem">
+            <input type="text" id="newCatInput" placeholder="New category..." style="flex:1;padding:.3rem .5rem;font-size:.78rem;border:1px solid var(--border);background:var(--card);font-family:var(--body);outline:none">
+            <button type="button" class="btn-sm btn-outline-sm" style="padding:.3rem .6rem;font-size:.65rem" onclick="addCategory()">+ Add</button>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="artMedium">Medium</label>
+          <input type="text" id="artMedium" value="Acrylic on Canvas">
+        </div>
+      </div>
+      <div class="form-row-3">
+        <div class="form-group">
+          <label for="artWidth">Width (in)</label>
+          <input type="number" id="artWidth" step="0.5" placeholder="24" oninput="resetRoomDefaults()">
+        </div>
+        <div class="form-group">
+          <label for="artHeight">Height (in)</label>
+          <input type="number" id="artHeight" step="0.5" placeholder="24" oninput="resetRoomDefaults()">
+        </div>
+        <div class="form-group">
+          <label for="artPrice">Price (&euro;)</label>
+          <input type="number" id="artPrice" step="1" placeholder="400">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="artStatus">Status</label>
+          <select id="artStatus">
+            <option value="Available">Available</option>
+            <option value="Sold">Sold</option>
+            <option value="Reserved">Reserved</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="artOrder">Display Order</label>
+          <input type="number" id="artOrder" step="1" placeholder="1">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="artYear">Year</label>
+          <input type="number" id="artYear" step="1" placeholder="2026">
+        </div>
+        <div class="form-group">
+          <label for="artSerial">Serial Nr</label>
+          <input type="text" id="artSerial" placeholder="e.g. HW18 - 1225">
+        </div>
+      </div>
+      <div class="form-group" style="display:flex;align-items:center;gap:.6rem">
+        <input type="checkbox" id="artFeatured" style="width:auto;accent-color:var(--accent)">
+        <label for="artFeatured" style="margin:0;cursor:pointer">Show on Homepage (Recent Paintings)</label>
+      </div>
+      <div class="form-group">
+        <label>Image</label>
+        <div class="img-upload-area" id="imgUploadArea">
+          <input type="file" id="artImage" accept="image/jpeg,image/png,image/webp" onchange="handleImageSelect(this)">
+          <p>Click or drag an image here<br><small>JPG/PNG/WebP, max 10 MB — auto-compressed to 1600px JPEG</small></p>
+        </div>
+        <img class="img-preview" id="imgPreview">
+        <input type="hidden" id="artImagePath">
+      </div>
+
+      <!-- ROOM POSITION EDITOR (Fabric.js) -->
+      <div class="form-group" id="roomPosGroup" style="display:none">
+        <label>Image Position in Room View</label>
+        <p style="font-size:.75rem;color:var(--text-l);margin-bottom:.5rem">Drag &amp; drop the painting. Use corner handles to resize, top handle to rotate freely.</p>
+        <select id="roomPosRoom" onchange="updateRoomPosEditor()" style="width:100%;max-width:240px;padding:.4rem .6rem;font-size:.82rem;border:1px solid var(--border);background:var(--card);font-family:var(--body);outline:none;margin-bottom:.5rem"></select>
+        <div style="position:relative;width:100%;aspect-ratio:16/10;border:1px solid var(--border);border-radius:4px;overflow:hidden;background:#e0ddd6">
+          <canvas id="rpeCanvas"></canvas>
+        </div>
+        <div class="room-pos-coords" id="rpePosInfo">Position: — | Size: — | Rotation: 0°</div>
+        <div style="display:flex;gap:.5rem;margin-top:.5rem;flex-wrap:wrap">
+          <button type="button" class="btn-sm btn-outline-sm" onclick="resetRoomPos()">Reset to Default</button>
+          <button type="button" class="btn-sm btn-primary" onclick="saveAllRoomPositions()">Apply to All Rooms</button>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="artDesc">Description <span id="charCount" style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--text-l)"></span></label>
+        <textarea id="artDesc" placeholder="Describe the artwork, its inspiration, and meaning..." oninput="updateCharCount()"></textarea>
+        <p style="font-size:.68rem;color:var(--text-l);margin-top:.25rem">Ideal: 150–300 characters for SEO</p>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-sm btn-outline-sm" onclick="closeModal()">Cancel</button>
+      <button class="btn-sm btn-primary" id="saveBtn" onclick="saveArtwork()">Save Artwork</button>
+    </div>
+  </div>
+</div>
+
+<!-- DELETE MODAL -->
+<div class="modal-overlay" id="deleteModal">
+  <div class="modal" style="max-width:420px">
+    <div class="modal-header">
+      <h3>Delete Artwork</h3>
+      <button class="modal-close" onclick="closeDeleteModal()">&times;</button>
+    </div>
+    <div class="modal-body">
+      <p style="font-size:.92rem;color:var(--text-l)">Are you sure you want to delete <strong id="deleteTitle"></strong>?<br>The site will be republished automatically.</p>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-sm btn-outline-sm" onclick="closeDeleteModal()">Cancel</button>
+      <button class="btn-sm btn-danger" id="deleteBtn" onclick="confirmDelete()">Delete</button>
+    </div>
+  </div>
+</div>
+
+<!-- SAVING OVERLAY -->
+<div class="saving-overlay" id="savingOverlay">
+  <div class="spinner"></div>
+  <p id="savingMsg">Saving to repository...</p>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="js/fabric.min.js"></script>
+<script>
+// ============================================================
+// CONFIGURATION
+// ============================================================
+const GIT_API = '/.netlify/git/github';
+const WORKS_PATH = 'works.json';
+const EXHIBITIONS_PATH = 'exhibitions.json';
+const SITE_CONTENT_PATH = 'site-content.json';
+const IMAGES_DIR = 'images';
+const BRANCH = 'main';
+
+let works = [];
+let exhibitionsSha = null;
+let siteContentSha = null;
+let worksSha = null;
+let deleteTargetId = null;
+let pendingImageFile = null;
+let pendingImageBase64 = null;
+let pendingChanges = 0;
+
+// ============================================================
+// GIT GATEWAY API HELPERS
+// ============================================================
+function getToken() {
+  const user = netlifyIdentity.currentUser();
+  if (!user) return null;
+  return user.jwt();
+}
+
+async function gitAPI(path, options = {}) {
+  const token = await getToken();
+  if (!token) throw new Error('Not authenticated');
+  const res = await fetch(GIT_API + path, {
+    ...options,
+    headers: {
+      'Authorization': 'Bearer ' + token,
+      'Content-Type': 'application/json',
+      ...(options.headers || {})
+    }
+  });
+  if (!res.ok) {
+    const err = await res.text().catch(() => res.statusText);
+    throw new Error('Git API error (' + res.status + '): ' + err);
+  }
+  return res.json();
+}
+
+// Read a file from the repo
+async function readFile(path) {
+  const data = await gitAPI('/contents/' + path + '?ref=' + BRANCH);
+  return {
+    content: atob(data.content.replace(/\n/g, '')),
+    sha: data.sha
+  };
+}
+
+// Write (create or update) a file in the repo
+async function writeFile(path, content, message, sha) {
+  const body = {
+    message: message,
+    content: btoa(unescape(encodeURIComponent(content))),
+    branch: BRANCH
+  };
+  if (sha) body.sha = sha;
+  return gitAPI('/contents/' + path, {
+    method: 'PUT',
+    body: JSON.stringify(body)
+  });
+}
+
+// Upload a binary file (image) to the repo
+async function uploadBinaryFile(path, base64Data, message) {
+  // Check if file already exists to get its SHA
+  let sha = null;
+  try {
+    const existing = await gitAPI('/contents/' + path + '?ref=' + BRANCH);
+    sha = existing.sha;
+  } catch(e) { /* file doesn't exist, that's fine */ }
+
+  const body = {
+    message: message,
+    content: base64Data,
+    branch: BRANCH
+  };
+  if (sha) body.sha = sha;
+  return gitAPI('/contents/' + path, {
+    method: 'PUT',
+    body: JSON.stringify(body)
+  });
+}
+
+// ============================================================
+// DATA MANAGEMENT
+// ============================================================
+async function loadWorks() {
+  try {
+    setSyncStatus('loading');
+    const file = await readFile(WORKS_PATH);
+    works = JSON.parse(file.content);
+    worksSha = file.sha;
+    renderAll();
+    setSyncStatus('saved');
+  } catch(e) {
+    console.error('Failed to load works.json from repo:', e);
+    // Fallback: try fetching from the deployed site
+    try {
+      const res = await fetch('/works.json?' + Date.now());
+      if (res.ok) {
+        works = await res.json();
+        renderAll();
+        setSyncStatus('saved');
+        showToast('Loaded works from deployed site', '');
+      }
+    } catch(e2) {
+      works = [];
+      renderAll();
+      setSyncStatus('error');
+      showToast('Could not load works data', 'error');
+    }
+  }
+}
+
+async function saveWorksToRepo(commitMessage) {
+  const json = JSON.stringify(works, null, 2);
+  try {
+    const result = await writeFile(WORKS_PATH, json, commitMessage, worksSha);
+    worksSha = result.content.sha;
+    setSyncStatus('saved');
+    pendingChanges = 0;
+    updatePublishBtn();
+    return true;
+  } catch(e) {
+    console.error('Failed to save works.json:', e);
+    setSyncStatus('error');
+    showToast('Failed to save: ' + e.message, 'error');
+    return false;
+  }
+}
+
+function markUnsaved() { markChanged(); }
+function markChanged() {
+  pendingChanges++;
+  setSyncStatus('unsaved');
+  updatePublishBtn();
+}
+
+function updatePublishBtn() {
+  const btn = document.getElementById('publishBtn');
+  const cnt = document.getElementById('changeCount');
+  if (pendingChanges > 0) {
+    btn.style.display = 'inline-block';
+    btn.classList.add('btn-publish-pulse');
+    cnt.textContent = '(' + pendingChanges + ')';
+  } else {
+    btn.style.display = 'none';
+    btn.classList.remove('btn-publish-pulse');
+  }
+}
+
+async function publishChanges() {
+  if (pendingChanges === 0) return;
+  document.getElementById('publishBtn').disabled = true;
+  showSaving('Publishing changes...');
+  try {
+    const okWorks = await saveWorksToRepo('Update artworks (' + pendingChanges + ' changes)');
+    // Save exhibitions if changed
+    if (window._pendingExhibitions !== undefined) {
+      await saveExhibitionsToRepo();
+    }
+    if (okWorks) {
+      showToast('All changes published! Site updating...', 'success');
+    }
+  } catch(e) {
+    showToast('Publish failed: ' + e.message, 'error');
+  } finally {
+    document.getElementById('publishBtn').disabled = false;
+    hideSaving();
+  }
+}
+
+async function saveExhibitionsToRepo() {
+  const json = JSON.stringify(window._pendingExhibitions || allExhibitions, null, 2);
+  try {
+    const result = await writeFile(EXHIBITIONS_PATH, json, 'Update exhibitions', exhibitionsSha);
+    exhibitionsSha = result.content.sha;
+    window._pendingExhibitions = undefined;
+    localStorage.removeItem('exh_draft');
+  } catch(e) { console.error('Failed to save exhibitions.json:', e); }
+}
+
+
+
+function exportCSV() {
+  const header = ['Title','Category','Medium','Width (in)','Height (in)','Price (EUR)','Status','Year','Serial Nr','Featured','Description'];
+  const rows = works.map(function(w) {
+    return [
+      '"' + (w.title||'').replace(/"/g,'""') + '"',
+      '"' + (w.category||'').replace(/"/g,'""') + '"',
+      '"' + (w.medium||'').replace(/"/g,'""') + '"',
+      w.width||'',
+      w.height||'',
+      w.price||'',
+      w.status||'',
+      w.year||'',
+      '"' + (w.serial||'').replace(/"/g,'""') + '"',
+      w.featured ? 'Yes' : 'No',
+      '"' + (w.description||'').replace(/"/g,'""') + '"'
+    ].join(',');
+  });
+  const csv = [header.join(','), ...rows].join('\n');
+  const blob = new Blob([csv], {type:'text/csv;charset=utf-8;'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = 'henk-weijers-artworks.csv';
+  document.body.appendChild(a); a.click();
+  document.body.removeChild(a); URL.revokeObjectURL(url);
+  showToast('CSV exported', 'success');
+}
+
+function slugify(t) {
+  return t.toLowerCase().replace(/[^\w\s-]/g,'').replace(/\s+/g,'-').replace(/-+/g,'-').trim();
+}
+
+function esc(s) { const d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
+
+async function toggleFeatured(id) {
+  const w = works.find(x => x.id === id);
+  if (!w) return;
+  if (!w.featured) {
+    const featuredCount = works.filter(x => x.featured).length;
+    if (featuredCount >= 12) {
+      showToast('Maximum 12 works on homepage. Unfeature one first.', 'error');
+      return;
+    }
+  }
+  w.featured = !w.featured;
+  renderAll();
+  markChanged();
+  const fc = works.filter(x => x.featured).length;
+  showToast(w.featured ? 'Marked for homepage (' + fc + '/12) — publish to apply' : 'Removed from homepage — publish to apply', 'success');
+}
+
+function changeStatus(id, newStatus) {
+  const w = works.find(x => x.id === id);
+  if (!w || w.status === newStatus) return;
+  w.status = newStatus;
+  // If sold, auto-remove from featured
+  if (newStatus === 'Sold' && w.featured) {
+    w.featured = false;
+  }
+  renderAll();
+  markChanged();
+  showToast(w.title + ' → ' + newStatus + ' — publish to apply', 'success');
+}
+
+// ============================================================
+// CATEGORY MANAGEMENT
+// ============================================================
+const DEFAULT_CATEGORIES = ['Geometric Abstraction', 'Landscapes', 'Stylised Realism', 'Ukraine Inspired'];
+let customCategories = JSON.parse(localStorage.getItem('henk_custom_cats') || '[]');
+
+function getCategories() {
+  var cats = new Set();
+  var removedDefaults = JSON.parse(localStorage.getItem('henk_removed_cats') || '[]');
+  DEFAULT_CATEGORIES.forEach(function(c){ if (removedDefaults.indexOf(c) === -1) cats.add(c); });
+  customCategories.forEach(function(c){cats.add(c)});
+  works.forEach(function(w){ if(w.category) cats.add(w.category); });
+  return Array.from(cats).sort();
+}
+
+function saveCustomCategories() {
+  localStorage.setItem('henk_custom_cats', JSON.stringify(customCategories));
+}
+
+function populateCategorySelect(selectedValue) {
+  var sel = document.getElementById('artCategory');
+  if (!sel) return;
+  var cats = getCategories();
+  sel.innerHTML = cats.map(function(c){
+    return '<option value="'+c+'"'+(c===selectedValue?' selected':'')+'>'+c+'</option>';
+  }).join('');
+}
+
+function addCategory() {
+  var input = document.getElementById('newCatInput');
+  var name = (input.value || '').trim();
+  if (!name) return;
+  var cats = getCategories();
+  if (cats.indexOf(name) !== -1) {
+    showToast('Category "' + name + '" already exists', 'error');
+    return;
+  }
+  customCategories.push(name);
+  saveCustomCategories();
+  input.value = '';
+  populateCategorySelect(name);
+  renderCategoryList();
+  showToast('Category "' + name + '" added', 'success');
+}
+
+function addCategoryFromMain() {
+  var input = document.getElementById('mainNewCatInput');
+  var name = (input.value || '').trim();
+  if (!name) return;
+  var cats = getCategories();
+  if (cats.indexOf(name) !== -1) {
+    showToast('Category "' + name + '" already exists', 'error');
+    return;
+  }
+  customCategories.push(name);
+  saveCustomCategories();
+  input.value = '';
+  renderCategoryList();
+  showToast('Category "' + name + '" added', 'success');
+}
+
+function removeCategory(cat) {
+  var usedBy = works.filter(function(w){ return w.category === cat; });
+  if (usedBy.length > 0) {
+    showToast('Cannot delete "' + cat + '" — used by ' + usedBy.length + ' artwork(s)', 'error');
+    return;
+  }
+  if (!confirm('Delete category "' + cat + '"?')) return;
+  // Remove from custom categories if present
+  customCategories = customCategories.filter(function(c){ return c !== cat; });
+  saveCustomCategories();
+  // If it's a default category, add it to a "removed defaults" list
+  if (DEFAULT_CATEGORIES.indexOf(cat) !== -1) {
+    var removed = JSON.parse(localStorage.getItem('henk_removed_cats') || '[]');
+    if (removed.indexOf(cat) === -1) removed.push(cat);
+    localStorage.setItem('henk_removed_cats', JSON.stringify(removed));
+  }
+  renderCategoryList();
+  showToast('Category "' + cat + '" removed', 'success');
+}
+
+function renderCategoryList() {
+  var el = document.getElementById('categoryList');
+  if (!el) return;
+  var cats = getCategories();
+  el.innerHTML = cats.map(function(c){
+    var count = works.filter(function(w){ return w.category === c; }).length;
+    var removeBtn = (count === 0) ? '<button class="cat-remove" onclick="removeCategory(\''+c.replace(/'/g,"\\'")+'\')" title="Delete category">&times;</button>' : '';
+    return '<span class="cat-tag">'+esc(c)+' <span class="cat-count">('+count+')</span>'+removeBtn+'</span>';
+  }).join('');
+}
+
+function updateCharCount() {
+  const len = (document.getElementById('artDesc').value || '').length;
+  const el = document.getElementById('charCount');
+  const color = len === 0 ? 'var(--text-l)' : len < 150 ? '#8B6914' : len <= 300 ? 'var(--success)' : 'var(--danger)';
+  el.style.color = color;
+  el.textContent = '(' + len + ' chars)';
+}
+
+// Warn before leaving with unsaved changes
+window.addEventListener('beforeunload', function(e) {
+  if (pendingChanges > 0) {
+    e.preventDefault();
+    e.returnValue = 'You have unpublished changes. Leave anyway?';
+    return e.returnValue;
+  }
+});
+
+// ============================================================
+// SYNC STATUS
+// ============================================================
+function setSyncStatus(status) {
+  const el = document.getElementById('syncStatus');
+  if (status === 'saved') { el.textContent = 'Synced'; el.className = 'sync-status sync-saved'; }
+  else if (status === 'unsaved') { el.textContent = 'Unsaved'; el.className = 'sync-status sync-unsaved'; }
+  else if (status === 'error') { el.textContent = 'Error'; el.className = 'sync-status sync-error'; }
+  else if (status === 'loading') { el.textContent = 'Loading...'; el.className = 'sync-status sync-unsaved'; }
+}
+
+function showSaving(msg) {
+  document.getElementById('savingMsg').textContent = msg || 'Saving to repository...';
+  document.getElementById('savingOverlay').classList.add('active');
+}
+function hideSaving() {
+  document.getElementById('savingOverlay').classList.remove('active');
+}
+
+// ============================================================
+// RENDERING
+// ============================================================
+function renderAll() { renderStats(); renderTable(); renderCategoryList(); }
+
+function renderStats() {
+  const total = works.length;
+  const avail = works.filter(w => w.status === 'Available').length;
+  const reserved = works.filter(w => w.status === 'Reserved').length;
+  const sold = works.filter(w => w.status === 'Sold').length;
+  document.getElementById('statsGrid').innerHTML =
+    `<div class="stat-card"><div class="stat-number">${total}</div><div class="stat-label">Total Works</div></div>` +
+    `<div class="stat-card"><div class="stat-number">${avail}</div><div class="stat-label">Available</div></div>` +
+    `<div class="stat-card"><div class="stat-number">${reserved}</div><div class="stat-label">Reserved</div></div>` +
+    `<div class="stat-card"><div class="stat-number">${sold}</div><div class="stat-label">Sold</div></div>`;
+}
+
+function renderTable() {
+  const searchTerm = (document.getElementById('searchInput')?.value || '').toLowerCase();
+  let sorted = [...works].sort((a,b) => (a.order||99) - (b.order||99));
+  if (searchTerm) {
+    sorted = sorted.filter(w =>
+      (w.title||'').toLowerCase().includes(searchTerm) ||
+      (w.category||'').toLowerCase().includes(searchTerm) ||
+      (w.status||'').toLowerCase().includes(searchTerm)
+    );
+  }
+  const tbody = document.getElementById('worksTableBody');
+  if (!sorted.length) {
+    tbody.innerHTML = '<tr><td colspan="9" style="text-align:center;padding:3rem;color:var(--text-l)">' + (searchTerm ? 'No results for "'+esc(searchTerm)+'"' : 'No artworks yet. Click "+ Add Artwork" to begin.') + '</td></tr>';
+    return;
+  }
+  tbody.innerHTML = sorted.map((w, idx) => {
+    const selClass = w.status==='Available'?'sel-available':w.status==='Sold'?'sel-sold':'sel-reserved';
+    const starClass = w.featured ? 'star on' : 'star off';
+    const starChar = w.featured ? '&#9733;' : '&#9734;';
+    const imgSrc = w.image ? '/'+w.image : '/favicon.svg';
+    return `<tr draggable="true" data-id="${w.id}" data-idx="${idx}">
+      <td><span class="drag-handle" title="Drag to reorder">&#9776;</span></td>
+      <td style="position:relative"><img class="thumb-sm" src="${imgSrc}" alt="${esc(w.title)}" onerror="this.src='/favicon.svg'" onmouseenter="showThumbPopup(event,'${imgSrc}')" onmouseleave="hideThumbPopup()"></td>
+      <td><strong style="font-family:var(--display);font-weight:400;font-style:italic">${esc(w.title)}</strong></td>
+      <td style="font-size:.82rem;color:var(--text-l)">${esc(w.category||'')}</td>
+      <td style="font-size:.82rem">${w.width||'?'} &times; ${w.height||'?'} in</td>
+      <td style="font-family:var(--display);font-weight:500">&euro;${(w.price||0).toLocaleString()}</td>
+      <td><select class="status-select ${selClass}" onchange="changeStatus('${w.id}',this.value)">
+        <option value="Available"${w.status==='Available'?' selected':''}>Available</option>
+        <option value="Reserved"${w.status==='Reserved'?' selected':''}>Reserved</option>
+        <option value="Sold"${w.status==='Sold'?' selected':''}>Sold</option>
+      </select></td>
+      <td><button class="${starClass}" onclick="toggleFeatured('${w.id}')" title="Show on Homepage">${starChar}</button></td>
+      <td><div class="table-actions">
+        <button class="btn-sm btn-outline-sm" onclick="openEditModal('${w.id}')">Edit</button>
+        <a class="btn-sm btn-outline-sm" href="/works/view.html?id=${encodeURIComponent(w.id)}" target="_blank" rel="noopener" style="text-decoration:none;display:inline-block" title="Live preview">&#128065;</a>
+        <button class="btn-sm btn-danger" onclick="openDeleteModal('${w.id}')">Del</button>
+      </div></td>
+    </tr>`;
+  }).join('');
+}
+
+// ============================================================
+// IMAGE HANDLING
+// ============================================================
+function handleImageSelect(input) {
+  if (!input.files || !input.files[0]) return;
+  const file = input.files[0];
+
+  if (file.size > 10 * 1024 * 1024) {
+    showToast('Image too large. Maximum 10 MB.', 'error');
+    input.value = '';
+    return;
+  }
+
+  pendingImageFile = file;
+  showToast('Compressing image...', '');
+
+  // Read and compress
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const img = new Image();
+    img.onload = function() {
+      // Resize to max 1600px on longest side
+      const MAX = 1600;
+      let w = img.width, h = img.height;
+      if (w > MAX || h > MAX) {
+        if (w > h) { h = Math.round(h * MAX / w); w = MAX; }
+        else { w = Math.round(w * MAX / h); h = MAX; }
+      }
+      const canvas = document.createElement('canvas');
+      canvas.width = w; canvas.height = h;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0, w, h);
+      // Compress to JPEG 85%
+      const compressed = canvas.toDataURL('image/jpeg', 0.85);
+      const p = document.getElementById('imgPreview');
+      p.src = compressed; p.style.display = 'block';
+      pendingImageBase64 = compressed.split(',')[1];
+      // Force .jpg extension
+      pendingImageFile = { name: file.name.replace(/\.[^.]+$/, '.jpg') };
+      const size = Math.round(pendingImageBase64.length * 3 / 4 / 1024);
+      showToast('Image compressed to ' + size + ' KB (' + w + '×' + h + ')', 'success');
+      // Show room position editor after image selected
+      if (allRooms.length) {
+        _currentPaintSrc = compressed;
+        // Pre-populate editingRoomPositions with correct defaults based on dimensions
+        if (Object.keys(editingRoomPositions).length === 0) {
+          var _w = parseFloat(document.getElementById('artWidth').value) || 24;
+          var _h = parseFloat(document.getElementById('artHeight').value) || 24;
+          var _isSquare = Math.abs(_w - _h) < 0.5;
+          var _SQPOS = {
+            'living-minimal': {x:50,y:31,scale:55,rotation:0},
+            'living-marble':  {x:63,y:36,scale:55,rotation:0},
+            'living-grey':    {x:55,y:35,scale:55,rotation:0},
+            'studio-leather': {x:47,y:33,scale:55,rotation:0},
+            'gallery-gold':   {x:51,y:32,scale:55,rotation:0},
+            'bedroom-wood':   {x:51,y:31,scale:55,rotation:0}
+          };
+          var _REPOS = {
+            'living-minimal': {x:50,y:31,scale:50,rotation:0},
+            'living-marble':  {x:63,y:33,scale:50,rotation:0},
+            'living-grey':    {x:55,y:33,scale:50,rotation:0},
+            'studio-leather': {x:42,y:32,scale:50,rotation:0},
+            'gallery-gold':   {x:51,y:35,scale:50,rotation:0},
+            'bedroom-wood':   {x:51,y:32,scale:50,rotation:0}
+          };
+          editingRoomPositions = _isSquare ? JSON.parse(JSON.stringify(_SQPOS)) : JSON.parse(JSON.stringify(_REPOS));
+        }
+        var fakeWork = { room_positions: editingRoomPositions };
+        showRoomPosEditor(fakeWork);
+      }
+    };
+    img.src = e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+async function uploadImage(file, base64) {
+  const safeName = 'img-' + Date.now() + '.jpg';
+  const path = IMAGES_DIR + '/' + safeName;
+  await uploadBinaryFile(path, base64, 'Add image: ' + safeName);
+  return path;
+}
+
+// ============================================================
+// ADD / EDIT MODAL
+// ============================================================
+function openAddModal() {
+  document.getElementById('modalTitle').textContent = 'Add Artwork';
+  document.getElementById('editId').value = '';
+  document.getElementById('artTitle').value = '';
+  populateCategorySelect('Geometric Abstraction');
+  document.getElementById('artMedium').value = 'Acrylic on Canvas';
+  document.getElementById('artWidth').value = '';
+  document.getElementById('artHeight').value = '';
+  document.getElementById('artPrice').value = '';
+  document.getElementById('artStatus').value = 'Available';
+  document.getElementById('artOrder').value = works.length + 1;
+  document.getElementById('artDesc').value = '';
+  document.getElementById('artImagePath').value = '';
+  document.getElementById('artImage').value = '';
+  document.getElementById('imgPreview').style.display = 'none';
+  document.getElementById('artFeatured').checked = false;
+  pendingImageFile = null;
+  pendingImageBase64 = null;
+  editingRoomPositions = {};
+  document.getElementById('roomPosGroup').style.display = 'none';
+  document.getElementById('artworkModal').classList.add('open');
+}
+
+function openEditModal(id) {
+  const w = works.find(x => x.id === id);
+  if (!w) return;
+  document.getElementById('modalTitle').textContent = 'Edit Artwork';
+  document.getElementById('editId').value = w.id;
+  document.getElementById('artTitle').value = w.title || '';
+  populateCategorySelect(w.category || 'Geometric Abstraction');
+  document.getElementById('artMedium').value = w.medium || 'Acrylic on Canvas';
+  document.getElementById('artWidth').value = w.width || '';
+  document.getElementById('artHeight').value = w.height || '';
+  document.getElementById('artPrice').value = w.price || '';
+  document.getElementById('artStatus').value = w.status || 'Available';
+  document.getElementById('artOrder').value = w.order || 1;
+  document.getElementById('artYear').value = w.year || '';
+  document.getElementById('artSerial').value = w.serial || '';
+  document.getElementById('artDesc').value = w.description || '';
+  document.getElementById('artImagePath').value = w.image || '';
+  document.getElementById('artFeatured').checked = !!w.featured;
+  const prev = document.getElementById('imgPreview');
+  if (w.image) { prev.src = '/' + w.image; prev.style.display = 'block'; } else { prev.style.display = 'none'; }
+  pendingImageFile = null;
+  pendingImageBase64 = null;
+  document.getElementById('artImage').value = '';
+  // Show room position editor if work has image
+  if (w.image && allRooms.length) {
+    showRoomPosEditor(w);
+  } else {
+    document.getElementById('roomPosGroup').style.display = 'none';
+  }
+  document.getElementById('artworkModal').classList.add('open');
+}
+
+function closeModal() {
+  document.getElementById('artworkModal').classList.remove('open');
+  pendingImageFile = null;
+  pendingImageBase64 = null;
+}
+
+async function saveArtwork() {
+  const title = document.getElementById('artTitle').value.trim();
+  const artWidth = document.getElementById('artWidth').value;
+  const artHeight = document.getElementById('artHeight').value;
+  const artPrice = document.getElementById('artPrice').value;
+  const artDesc = document.getElementById('artDesc').value.trim();
+  const editId = document.getElementById('editId').value;
+  const hasImage = !!(document.getElementById('artImagePath').value.trim() || (pendingImageFile && pendingImageBase64));
+
+  // Validate all required fields
+  if (!title) { showToast('Title is required', 'error'); return; }
+  if (!artWidth || parseFloat(artWidth) <= 0) { showToast('Width is required', 'error'); return; }
+  if (!artHeight || parseFloat(artHeight) <= 0) { showToast('Height is required', 'error'); return; }
+  if (!artPrice || parseInt(artPrice) <= 0) { showToast('Price is required', 'error'); return; }
+  if (!artDesc) { showToast('Description is required', 'error'); return; }
+  if (!editId && !hasImage) { showToast('Image is required', 'error'); return; }
+
+  const id = editId || slugify(title);
+  if (!editId && works.find(w => w.id === id)) {
+    showToast('An artwork with a similar title already exists', 'error');
+    return;
+  }
+
+  document.getElementById('saveBtn').disabled = true;
+
+  try {
+    let imagePath = document.getElementById('artImagePath').value.trim();
+
+    if (pendingImageFile && pendingImageBase64) {
+      showSaving('Uploading image...');
+      imagePath = await uploadImage(pendingImageFile, pendingImageBase64);
+      hideSaving();
+    }
+
+    const newOrder = parseInt(document.getElementById('artOrder').value) || works.length + 1;
+
+    const data = {
+      id, title,
+      category: document.getElementById('artCategory').value,
+      medium: document.getElementById('artMedium').value,
+      width: parseFloat(artWidth) || 0,
+      height: parseFloat(artHeight) || 0,
+      price: parseInt(artPrice) || 0,
+      status: document.getElementById('artStatus').value,
+      image: imagePath,
+      description: artDesc,
+      order: newOrder,
+      featured: document.getElementById('artFeatured').checked,
+      year: parseInt(document.getElementById('artYear').value) || null,
+      serial: document.getElementById('artSerial').value.trim() || null
+    };
+
+    // Set default room positions based on aspect ratio if none edited
+    var SQUARE_POS = {
+      'living-minimal': {x:50,y:31,scale:55,rotation:0},
+      'living-marble':  {x:63,y:36,scale:55,rotation:0},
+      'living-grey':    {x:55,y:35,scale:55,rotation:0},
+      'studio-leather': {x:47,y:33,scale:55,rotation:0},
+      'gallery-gold':   {x:51,y:32,scale:55,rotation:0},
+      'bedroom-wood':   {x:51,y:31,scale:55,rotation:0}
+    };
+    var RECT_POS = {
+      'living-minimal': {x:50,y:31,scale:50,rotation:0},
+      'living-marble':  {x:63,y:33,scale:50,rotation:0},
+      'living-grey':    {x:55,y:33,scale:50,rotation:0},
+      'studio-leather': {x:42,y:32,scale:50,rotation:0},
+      'gallery-gold':   {x:51,y:35,scale:50,rotation:0},
+      'bedroom-wood':   {x:51,y:32,scale:50,rotation:0}
+    };
+    if (Object.keys(editingRoomPositions).length > 0) {
+      data.room_positions = editingRoomPositions;
+    } else if (!editId) {
+      // New artwork: assign defaults based on shape
+      var isSquare = Math.abs(data.width - data.height) < 0.5;
+      data.room_positions = isSquare ? SQUARE_POS : RECT_POS;
+    }
+
+    if (editId) {
+      const idx = works.findIndex(w => w.id === editId);
+      if (idx !== -1) {
+        if (!data.image && works[idx].image) data.image = works[idx].image;
+        const oldOrder = works[idx].order || 99;
+        works[idx] = { ...works[idx], ...data };
+        // Reindex if order changed
+        if (oldOrder !== newOrder) reindexOrders(editId, newOrder);
+      }
+    } else {
+      works.push(data);
+      reindexOrders(id, newOrder);
+    }
+
+    renderAll();
+    markChanged();
+    closeModal();
+    showToast(editId ? 'Artwork updated — publish to apply' : 'Artwork added — publish to apply', 'success');
+  } catch(e) {
+    console.error('Save failed:', e);
+    showToast('Save failed: ' + e.message, 'error');
+  } finally {
+    document.getElementById('saveBtn').disabled = false;
+  }
+}
+
+// Reindex all order values so they stay sequential after inserting/moving an item
+function reindexOrders(movedId, targetOrder) {
+  // Sort all works by order, then for ties put the moved one at targetOrder
+  var sorted = [...works].sort(function(a, b) {
+    if (a.id === movedId) return 0;
+    if (b.id === movedId) return 0;
+    return (a.order || 99) - (b.order || 99);
+  });
+  // Remove moved item, insert at correct position
+  sorted = sorted.filter(function(w) { return w.id !== movedId; });
+  var movedWork = works.find(function(w) { return w.id === movedId; });
+  var insertIdx = Math.max(0, Math.min(sorted.length, targetOrder - 1));
+  sorted.splice(insertIdx, 0, movedWork);
+  // Reassign sequential orders
+  sorted.forEach(function(sw, i) {
+    var original = works.find(function(w) { return w.id === sw.id; });
+    if (original) original.order = i + 1;
+  });
+}
+
+// ============================================================
+// DELETE
+// ============================================================
+function openDeleteModal(id) {
+  deleteTargetId = id;
+  const w = works.find(x => x.id === id);
+  document.getElementById('deleteTitle').textContent = w ? w.title : id;
+  document.getElementById('deleteModal').classList.add('open');
+}
+
+function closeDeleteModal() {
+  document.getElementById('deleteModal').classList.remove('open');
+  deleteTargetId = null;
+}
+
+async function confirmDelete() {
+  if (!deleteTargetId) return;
+  const w = works.find(x => x.id === deleteTargetId);
+  const title = w ? w.title : deleteTargetId;
+  works = works.filter(w => w.id !== deleteTargetId);
+  renderAll();
+  markChanged();
+  showToast('Artwork "' + title + '" removed — publish to apply', 'success');
+  closeDeleteModal();
+}
+
+// ============================================================
+// TOAST
+// ============================================================
+function showToast(msg, type) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast show' + (type ? ' ' + type : '');
+  clearTimeout(t._timer);
+  t._timer = setTimeout(() => { t.className = 'toast'; }, 5000);
+}
+
+// ============================================================
+// AUTH — NETLIFY IDENTITY
+// ============================================================
+const netlifyIdentity = window.netlifyIdentity;
+
+function initAuth() {
+  if (!netlifyIdentity) {
+    console.warn('Netlify Identity not loaded');
+    document.getElementById('loginScreen').style.display = 'flex';
+    return;
+  }
+
+  netlifyIdentity.init();
+
+  // Hide signup tab: inject CSS into the identity widget after it mounts
+  netlifyIdentity.on('open', function() {
+    setTimeout(function() {
+      var iframe = document.querySelector('[data-netlify-identity-widget] iframe, iframe[src*="identity"]');
+      if (iframe && iframe.contentDocument) {
+        var style = iframe.contentDocument.createElement('style');
+        style.textContent = '[data-testid="signup-tab"],[data-name="signup-tab"],[href*="signup"],[data-link="signup"]{display:none!important}';
+        iframe.contentDocument.head.appendChild(style);
+      }
+      // Also try to hide via the container shadow DOM
+      document.querySelectorAll('[data-netlify-identity-widget] a, .netlify-identity-menu-item').forEach(function(el){
+        if (el.textContent && el.textContent.toLowerCase().includes('sign up')) {
+          el.style.display = 'none';
+        }
+      });
+    }, 300);
+  });
+
+  const user = netlifyIdentity.currentUser();
+  if (user) {
+    showAdmin(user.email);
+    loadWorks();
+  loadExhibitions();
+  } else {
+    document.getElementById('loginScreen').style.display = 'flex';
+  }
+
+  netlifyIdentity.on('login', function(u) {
+    showAdmin(u.email);
+    loadWorks();
+    netlifyIdentity.close();
+  });
+
+  netlifyIdentity.on('logout', function() {
+    document.getElementById('adminPanel').style.display = 'none';
+    document.getElementById('loginScreen').style.display = 'flex';
+    works = [];
+    worksSha = null;
+  });
+}
+
+function showAdmin(email) {
+  document.getElementById('loginScreen').style.display = 'none';
+  document.getElementById('adminPanel').style.display = 'block';
+  document.getElementById('userEmail').textContent = email || '';
+}
+
+function logout() {
+  if (pendingChanges > 0) {
+    if (!confirm('You have ' + pendingChanges + ' unpublished change(s). Sign out anyway? Changes will be lost.')) return;
+  }
+  if (netlifyIdentity) netlifyIdentity.logout();
+}
+
+// Event listeners
+document.getElementById('loginBtn').addEventListener('click', function() {
+  // Always open login tab specifically (not signup)
+  if (netlifyIdentity) netlifyIdentity.open('login');
+});
+document.getElementById('artworkModal').addEventListener('click', function(e) { if (e.target === this) closeModal(); });
+document.getElementById('deleteModal').addEventListener('click', function(e) { if (e.target === this) closeDeleteModal(); });
+document.addEventListener('keydown', function(e) { if (e.key === 'Escape') { closeModal(); closeDeleteModal(); } });
+
+// ============================================================
+// DRAG & DROP REORDERING
+// ============================================================
+let dragSrcId = null;
+
+document.getElementById('worksTableBody').addEventListener('dragstart', function(e) {
+  const tr = e.target.closest('tr');
+  if (!tr) return;
+  dragSrcId = tr.dataset.id;
+  tr.classList.add('dragging');
+  e.dataTransfer.effectAllowed = 'move';
+  e.dataTransfer.setData('text/plain', dragSrcId);
+});
+
+document.getElementById('worksTableBody').addEventListener('dragend', function(e) {
+  const tr = e.target.closest('tr');
+  if (tr) tr.classList.remove('dragging');
+  document.querySelectorAll('.drag-over').forEach(function(el){ el.classList.remove('drag-over'); });
+  document.querySelectorAll('.drag-below').forEach(function(el){ el.classList.remove('drag-below'); });
+});
+
+document.getElementById('worksTableBody').addEventListener('dragover', function(e) {
+  e.preventDefault();
+  e.dataTransfer.dropEffect = 'move';
+  const tr = e.target.closest('tr');
+  if (!tr || tr.dataset.id === dragSrcId) return;
+  document.querySelectorAll('.drag-over,.drag-below').forEach(function(el){ el.classList.remove('drag-over','drag-below'); });
+  // Determine if cursor is in upper or lower half of the row
+  var rect = tr.getBoundingClientRect();
+  var midY = rect.top + rect.height / 2;
+  if (e.clientY < midY) {
+    tr.classList.add('drag-over'); // insert above
+  } else {
+    tr.classList.add('drag-below'); // insert below
+  }
+});
+
+document.getElementById('worksTableBody').addEventListener('dragleave', function(e) {
+  const tr = e.target.closest('tr');
+  if (tr) { tr.classList.remove('drag-over'); tr.classList.remove('drag-below'); }
+});
+
+document.getElementById('worksTableBody').addEventListener('drop', function(e) {
+  e.preventDefault();
+  var isBelow = !!e.target.closest('tr.drag-below');
+  document.querySelectorAll('.drag-over,.drag-below').forEach(function(el){ el.classList.remove('drag-over','drag-below'); });
+  const targetTr = e.target.closest('tr');
+  if (!targetTr || !dragSrcId) return;
+  const targetId = targetTr.dataset.id;
+  if (targetId === dragSrcId) return;
+
+  const sorted = [...works].sort((a,b) => (a.order||99) - (b.order||99));
+  const srcIdx = sorted.findIndex(w => w.id === dragSrcId);
+  var tgtIdx = sorted.findIndex(w => w.id === targetId);
+  if (srcIdx === -1 || tgtIdx === -1) return;
+
+  // Remove dragged item
+  const [moved] = sorted.splice(srcIdx, 1);
+  // Recalculate target index after removal
+  tgtIdx = sorted.findIndex(w => w.id === targetId);
+  // Insert above or below target
+  if (isBelow) {
+    sorted.splice(tgtIdx + 1, 0, moved);
+  } else {
+    sorted.splice(tgtIdx, 0, moved);
+  }
+  // Reassign sequential order numbers
+  sorted.forEach(function(sortedWork, i) {
+    const original = works.find(function(w) { return w.id === sortedWork.id; });
+    if (original) original.order = i + 1;
+  });
+
+  renderAll();
+  dragSrcId = null;
+  markChanged();
+  showToast('Order updated — publish to apply', 'success');
+});
+
+// ============================================================
+// ROOM POSITION EDITOR — Fabric.js
+// ============================================================
+let allRooms = [];
+let currentRoomIdx = 0;
+let editingRoomPositions = {};
+var _fc = null;      // fabric.Canvas instance
+var _fpImg = null;   // fabric painting image object
+var _currentPaintSrc = '';
+var FC_W = 640, FC_H = 400;
+
+async function loadRooms() {
+  try {
+    const res = await fetch('/rooms.json?' + Date.now());
+    if (res.ok) allRooms = await res.json();
+  } catch(e) { allRooms = []; }
+}
+loadRooms();
+
+function _fabricInit() {
+  var el = document.getElementById('rpeCanvas');
+  if (!el) return;
+  if (_fc) { try { _fc.dispose(); } catch(e){} _fc = null; }
+  _fpImg = null;
+  _fc = new fabric.Canvas('rpeCanvas', {
+    width: FC_W, height: FC_H,
+    selection: false, uniformScaling: true
+  });
+  // Scale canvas to fit container
+  var container = el.parentElement;
+  function _resize() {
+    if (!_fc || !container) return;
+    var cw = container.offsetWidth || FC_W;
+    var s = cw / FC_W;
+    _fc.setZoom(s);
+    _fc.setDimensions({ width: cw, height: Math.round(FC_H * s) });
+  }
+  _resize();
+  window.addEventListener('resize', _resize);
+  _fc.on('object:modified', _syncFabricToData);
+  _fc.on('object:moving', _syncFabricToData);
+  _fc.on('object:scaling', _syncFabricToData);
+  _fc.on('object:rotating', _syncFabricToData);
+}
+
+function _syncFabricToData() {
+  if (!_fpImg || !_fc) return;
+  var room = allRooms[currentRoomIdx];
+  if (!room) return;
+  var obj = _fpImg;
+  var bw = obj.width * obj.scaleX;
+  var bh = obj.height * obj.scaleY;
+  var cx = obj.left + bw / 2;
+  var cy = obj.top + bh / 2;
+  var xPct = (cx / FC_W) * 100;
+  var yPct = (cy / FC_H) * 100;
+  var maxPct = room.max_painting_pct || 30;
+  var paintWidthPct = (bw / FC_W) * 100;
+  var scalePct = (paintWidthPct / maxPct) * 100;
+  var pos = {
+    x: Math.round(xPct * 10) / 10,
+    y: Math.round(yPct * 10) / 10,
+    scale: Math.round(scalePct * 10) / 10,
+    rotation: Math.round(obj.angle || 0)
+  };
+  editingRoomPositions[room.id] = pos;
+  updatePosInfo(pos, paintWidthPct);
+}
+
+function _loadFabricRoom(roomSrc, paintSrc, pos, room) {
+  if (!_fc) return;
+  _fc.clear();
+  _fpImg = null;
+  if (typeof fabric === 'undefined') return;
+  var FI = fabric.FabricImage || fabric.Image;
+  // Load background room image
+  FI.fromURL('/' + roomSrc, { crossOrigin: 'anonymous' }).then(function(bgImg) {
+    bgImg.set({ left: 0, top: 0, selectable: false, evented: false, originX: 'left', originY: 'top' });
+    bgImg.scaleX = FC_W / bgImg.width;
+    bgImg.scaleY = FC_H / bgImg.height;
+    _fc.add(bgImg);
+    _fc.sendObjectToBack(bgImg);
+    if (!paintSrc) { _fc.renderAll(); return; }
+    // Load painting on top
+    return FI.fromURL(paintSrc, { crossOrigin: 'anonymous' });
+  }).then(function(paintImg) {
+    if (!paintImg) return;
+    var maxPct = room.max_painting_pct || 30;
+    var scaledPct = maxPct * ((pos.scale || 100) / 100);
+    var targetW = FC_W * scaledPct / 100;
+    var artW = parseFloat(document.getElementById('artWidth').value) || 24;
+    var artH = parseFloat(document.getElementById('artHeight').value) || 24;
+    var ratio = artW / artH;
+    var sx = targetW / paintImg.width;
+    var sy = (targetW / ratio) / paintImg.height;
+    var cx = FC_W * (pos.x || 50) / 100;
+    var cy = FC_H * (pos.y || 30) / 100;
+    paintImg.set({
+      left: cx - (paintImg.width * sx) / 2,
+      top: cy - (paintImg.height * sy) / 2,
+      scaleX: sx, scaleY: sy,
+      angle: pos.rotation || 0,
+      originX: 'left', originY: 'top',
+      borderColor: '#3b82f6', cornerColor: '#3b82f6',
+      cornerSize: 10, transparentCorners: false,
+      lockUniScaling: false
+    });
+    _fpImg = paintImg;
+    _fc.add(paintImg);
+    _fc.setActiveObject(paintImg);
+    _fc.renderAll();
+    updatePosInfo(pos, scaledPct);
+  }).catch(function(e) { console.warn('fabric room load error', e); });
+}
+
+function showRoomPosEditor(work) {
+  const group = document.getElementById('roomPosGroup');
+  if (!allRooms.length) { group.style.display = 'none'; return; }
+  group.style.display = 'block';
+  editingRoomPositions = work.room_positions ? JSON.parse(JSON.stringify(work.room_positions)) : {};
+  const sel = document.getElementById('roomPosRoom');
+  sel.innerHTML = allRooms.map(function(r, i){
+    return '<option value="'+i+'">'+r.name+'</option>';
+  }).join('');
+  currentRoomIdx = 0;
+  var imgEl = document.getElementById('imgPreview');
+  _currentPaintSrc = (imgEl && imgEl.src && imgEl.src !== window.location.href) ? imgEl.src : (work.image ? '/' + work.image : '');
+  _fabricInit();
+  updateRoomPosEditor();
+}
+
+function getRoomPos(roomId) {
+  if (editingRoomPositions[roomId]) return editingRoomPositions[roomId];
+  var room = allRooms.find(function(r){ return r.id === roomId; });
+  if (!room) return { x: 50, y: 30, scale: 100, rotation: 0 };
+  return { x: room.wall_center_x, y: room.wall_center_y, scale: 100, rotation: 0 };
+}
+
+function updateRoomPosEditor() {
+  var idx = parseInt(document.getElementById('roomPosRoom').value) || 0;
+  currentRoomIdx = idx;
+  var room = allRooms[idx];
+  if (!room) return;
+  var pos = getRoomPos(room.id);
+  _loadFabricRoom(room.image, _currentPaintSrc, pos, room);
+}
+
+function updatePosInfo(pos, sizePct) {
+  document.getElementById('rpePosInfo').textContent =
+    'Position: X=' + Math.round(pos.x) + '% Y=' + Math.round(pos.y) + '% | Size: ' + Math.round(pos.scale) + '% | Rotation: ' + (pos.rotation || 0) + '°';
+}
+
+function resetRoomPos() {
+  var room = allRooms[currentRoomIdx];
+  if (!room) return;
+  delete editingRoomPositions[room.id];
+  updateRoomPosEditor();
+  showToast('Position reset to default for "' + room.name + '"', 'success');
+}
+
+function saveAllRoomPositions() {
+  _syncFabricToData();
+  var room = allRooms[currentRoomIdx];
+  if (!room) return;
+  var pos = getRoomPos(room.id);
+  allRooms.forEach(function(r) {
+    editingRoomPositions[r.id] = { x: pos.x, y: pos.y, scale: pos.scale, rotation: pos.rotation || 0 };
+  });
+  showToast('Position applied to all rooms', 'success');
+}
+
+
+// ============================================================
+// EXHIBITIONS MANAGEMENT
+// ============================================================
+var allExhibitions = [];
+
+function fmtDateAdmin(str){
+  if(!str) return '';
+  var d = new Date(str + 'T12:00:00');
+  return d.toLocaleDateString('en-GB',{month:'short',year:'numeric'});
+}
+
+function loadExhibitions() {
+  // getToken() returns a Promise (user.jwt()) or null — wrap in Promise.resolve
+  Promise.resolve(getToken()).then(function(token) {
+    if (!token) {
+      // Not authenticated yet — fall back to plain public fetch
+      return fetch('/exhibitions.json').then(function(r){ return r.json(); });
+    }
+    return fetch(GIT_API + '/contents/exhibitions.json?ref=' + BRANCH, {
+      headers: { 'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json' }
+    }).then(function(r){ return r.json(); }).then(function(data) {
+      exhibitionsSha = data.sha || null;
+      try { return JSON.parse(atob(data.content.replace(/\n/g,''))); } catch(e) { return []; }
+    });
+  }).then(function(data) {
+    allExhibitions = data || [];
+    localStorage.removeItem('exh_draft');
+    renderExhibitions();
+    loadExhibitionsVisibility();
+  }).catch(function() {
+    fetch('/exhibitions.json').then(function(r){ return r.json(); }).then(function(data) {
+      allExhibitions = data || [];
+      renderExhibitions();
+      loadExhibitionsVisibility();
+    }).catch(function() { allExhibitions = []; renderExhibitions(); });
+  });
+}
+
+function renderExhibitions() {
+  var el = document.getElementById('exhibitionsAdminList');
+  if (!el) return;
+  if (!allExhibitions.length) {
+    el.innerHTML = '<p style="color:var(--text-l);font-size:.88rem;padding:.5rem 0">No exhibitions yet. Click &ldquo;+ Add Exhibition&rdquo; to get started.</p>';
+    return;
+  }
+  // Sort descending
+  var sorted = allExhibitions.slice().sort(function(a,b){ return (b.date_from||'').localeCompare(a.date_from||''); });
+  el.innerHTML = sorted.map(function(ex, i) {
+    var dateStr = fmtDateAdmin(ex.date_from);
+    if(ex.date_to) dateStr += ' &ndash; ' + fmtDateAdmin(ex.date_to);
+    var origIdx = allExhibitions.indexOf(ex);
+    return '<div style="background:var(--card);border:1px solid var(--border);padding:.9rem 1.15rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap">'
+      + '<div style="flex:1;min-width:180px">'
+      + '<p style="font-family:var(--display);font-size:1.05rem;font-style:italic;margin-bottom:.1rem">' + ex.name + '</p>'
+      + '<p style="font-size:.82rem;color:var(--text-l);margin-bottom:.05rem">' + ex.venue + '</p>'
+      + '<p style="font-size:.75rem;color:var(--accent);letter-spacing:.06em">' + dateStr + '</p>'
+      + '</div>'
+      + '<div style="display:flex;gap:.4rem;flex-shrink:0">'
+      + '<button class="btn-sm btn-outline-sm" onclick="editExhibition('+origIdx+')">Edit</button>'
+      + '<button class="btn-sm btn-danger" onclick="deleteExhibition('+origIdx+')">Del</button>'
+      + '</div>'
+      + '</div>';
+  }).join('');
+}
+
+function openExhModal(prefillIdx) {
+  var isEdit = prefillIdx !== undefined;
+  document.getElementById('exhModalTitle').textContent = isEdit ? 'Edit Exhibition' : 'Add Exhibition';
+  document.getElementById('exhEditId').value = isEdit ? String(prefillIdx) : '';
+  var ex = isEdit ? allExhibitions[prefillIdx] : {};
+  document.getElementById('exhName').value = ex.name || '';
+  document.getElementById('exhVenue').value = ex.venue || '';
+  document.getElementById('exhDateFrom').value = ex.date_from || '';
+  document.getElementById('exhDateTo').value = ex.date_to || '';
+  document.getElementById('exhModal').classList.add('open');
+}
+
+function closeExhModal() {
+  document.getElementById('exhModal').classList.remove('open');
+}
+
+function editExhibition(i) { openExhModal(i); }
+
+function deleteExhibition(i) {
+  if (!confirm('Delete "' + allExhibitions[i].name + '"?')) return;
+  allExhibitions.splice(i, 1);
+  renderExhibitions();
+  persistExhibitions();
+}
+
+function saveExhibition() {
+  var idxStr = document.getElementById('exhEditId').value;
+  var name = document.getElementById('exhName').value.trim();
+  if (!name) { showToast('Exhibition name is required', 'error'); return; }
+  var ex = {
+    id: (idxStr !== '' && allExhibitions[parseInt(idxStr)]) ? allExhibitions[parseInt(idxStr)].id : ('exh-' + Date.now()),
+    name: name,
+    venue: document.getElementById('exhVenue').value.trim(),
+    date_from: document.getElementById('exhDateFrom').value,
+    date_to: document.getElementById('exhDateTo').value
+  };
+  if (idxStr !== '') {
+    allExhibitions[parseInt(idxStr)] = ex;
+  } else {
+    allExhibitions.push(ex);
+  }
+  closeExhModal();
+  renderExhibitions();
+  persistExhibitions();
+  showToast('Exhibition saved', 'success');
+}
+
+function persistExhibitions() {
+  localStorage.setItem('exh_draft', JSON.stringify(allExhibitions));
+  markUnsaved();
+  window._pendingExhibitions = allExhibitions;
+}
+
+
+// Reset editingRoomPositions when dimensions change so defaults recalculate
+function resetRoomDefaults() {
+  var editId = document.getElementById('editId').value;
+  if (!editId) { editingRoomPositions = {}; }
+}
+
+// ============================================================
+// EXHIBITIONS VISIBILITY TOGGLE
+// ============================================================
+var exhibitionsVisible = true;
+
+function loadExhibitionsVisibility() {
+  Promise.resolve(getToken()).then(function(token) {
+    if (!token) return;
+    return fetch(GIT_API + '/contents/' + SITE_CONTENT_PATH + '?ref=' + BRANCH, {
+      headers: { 'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json' }
+    }).then(function(r) { return r.json(); }).then(function(data) {
+      siteContentSha = data.sha || null;
+      var sc = {};
+      try { sc = JSON.parse(atob(data.content.replace(/\n/g,''))); } catch(e) {}
+      exhibitionsVisible = sc.exhibitions_visible !== false;
+      var toggle = document.getElementById('exhVisibleToggle');
+      if (toggle) toggle.checked = exhibitionsVisible;
+      updateExhBadge();
+    });
+  }).catch(function() {
+    var toggle = document.getElementById('exhVisibleToggle');
+    if (toggle) toggle.checked = true;
+    updateExhBadge();
+  });
+}
+
+function updateExhBadge() {
+  var badge = document.getElementById('exhVisibleBadge');
+  if (!badge) return;
+  if (exhibitionsVisible) {
+    badge.textContent = 'Visible';
+    badge.style.background = 'var(--success)';
+    badge.style.color = '#fff';
+  } else {
+    badge.textContent = 'Hidden';
+    badge.style.background = '#8B6914';
+    badge.style.color = '#fff';
+  }
+}
+
+function toggleExhibitionsVisibility() {
+  var toggle = document.getElementById('exhVisibleToggle');
+  exhibitionsVisible = toggle.checked;
+  updateExhBadge();
+  // Persist to site-content.json via publish
+  window._pendingSiteContent = window._pendingSiteContent || {};
+  window._pendingSiteContent.exhibitions_visible = exhibitionsVisible;
+  // Also save immediately via git
+  fetch('/site-content.json').then(function(r){ return r.json(); }).then(function(sc) {
+    sc.exhibitions_visible = exhibitionsVisible;
+    return writeFile(SITE_CONTENT_PATH, JSON.stringify(sc, null, 2), 'Toggle exhibitions visibility', siteContentSha);
+  }).then(function(result) {
+    siteContentSha = result.content.sha;
+    showToast(exhibitionsVisible ? 'Exhibitions visible on site' : 'Exhibitions hidden from site', 'success');
+  }).catch(function(e) {
+    showToast('Save failed: ' + e.message, 'error');
+  });
+}
+
+// Init
+initAuth();
+</script>
+<div id="thumbPopup" class="thumb-popup"></div>
+<script>
+function showThumbPopup(e, src){
+  var p = document.getElementById('thumbPopup');
+  p.style.backgroundImage = 'url('+src+')';
+  p.style.backgroundSize = 'cover';
+  p.style.backgroundPosition = 'center';
+  p.style.display = 'block';
+  posThumbPopup(e);
+}
+function posThumbPopup(e){
+  var p = document.getElementById('thumbPopup');
+  var x = e.clientX + 14, y = e.clientY - 110;
+  if(x + 230 > window.innerWidth) x = e.clientX - 234;
+  if(y < 8) y = 8;
+  p.style.left = x + 'px'; p.style.top = y + 'px';
+}
+function hideThumbPopup(){
+  document.getElementById('thumbPopup').style.display='none';
+}
+document.addEventListener('mousemove', function(e){
+  var p = document.getElementById('thumbPopup');
+  if(p && p.style.display==='block') posThumbPopup(e);
+});
+</script>
+</body>
+</html>

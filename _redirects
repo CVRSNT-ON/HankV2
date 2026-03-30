@@ -1,0 +1,20 @@
+# Redirect old static work pages to dynamic viewer
+/works/pigeonholing.html         /works/view.html?id=pigeonholing              302
+/works/the-relentless-red-race.html  /works/view.html?id=the-relentless-red-race  302
+/works/lauterbrunnen.html        /works/view.html?id=lauterbrunnen             302
+/works/burgdorf.html             /works/view.html?id=burgdorf                  302
+/works/timurid-palette.html      /works/view.html?id=timurid-palette           302
+/works/the-musical-box.html      /works/view.html?id=the-musical-box           302
+/works/ruby-my-dear.html         /works/view.html?id=ruby-my-dear              302
+/works/fragments-of-freedom.html /works/view.html?id=fragments-of-freedom      302
+/works/lavaux.html               /works/view.html?id=lavaux                    302
+/works/bavovna-ii.html           /works/view.html?id=bavovna-ii                302
+/works/pictures-at-an-exhibition-i.html  /works/view.html?id=pictures-at-an-exhibition-i   302
+/works/pictures-at-an-exhibition-ii.html /works/view.html?id=pictures-at-an-exhibition-ii  302
+/works/collected-thoughts.html   /works/view.html?id=collected-thoughts         302
+/works/impulse-versus-discipline.html /works/view.html?id=impulse-versus-discipline 302
+/works/dolce-maria.html          /works/view.html?id=dolce-maria                302
+/works/dads-ties.html            /works/view.html?id=dads-ties                  302
+/works/cerrado.html              /works/view.html?id=cerrado                    302
+/works/colour-dialogues.html     /works/view.html?id=colour-dialogues           302
+/works/firebreaks.html           /works/view.html?id=firebreaks                 302

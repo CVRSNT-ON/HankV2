@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Henk Weijers — Acrylic painter exploring geometric abstraction and expressive impressionism. Original paintings available for purchase.">
+<meta name="author" content="Henk Weijers">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<title>Henk Weijers — Acrylic Painter</title>
+<meta property="og:title" content="Henk Weijers — Acrylic Painter">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://henk-weijers-site.netlify.app/index.html">
+<meta property="og:image" content="https://henk-weijers-site.netlify.app/images/portrait.jpg">
+<meta property="og:site_name" content="Henk Weijers — Acrylic Painter">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+@font-face{font-family:'Avenir Next LT Pro';src:url('fonts/AvenirNextLTPro-UltLt.otf') format('opentype');font-weight:300;font-style:normal;font-display:swap}
+@font-face{font-family:'Avenir Next LT Pro';src:url('fonts/AvenirNextLTPro-Regular.otf') format('opentype');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'Avenir Next LT Pro';src:url('fonts/AvenirNextLTPro-It.otf') format('opentype');font-weight:400;font-style:italic;font-display:swap}
+@font-face{font-family:'Avenir Next LT Pro';src:url('fonts/AvenirNextLTPro-Medium.otf') format('opentype');font-weight:500;font-style:normal;font-display:swap}
+@font-face{font-family:'Avenir Next LT Pro';src:url('fonts/AvenirNextLTPro-MediumIt.otf') format('opentype');font-weight:500;font-style:italic;font-display:swap}
+@font-face{font-family:'Avenir Next LT Pro';src:url('fonts/AvenirNextLTPro-Demi.otf') format('opentype');font-weight:600;font-style:normal;font-display:swap}
+</style>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#F5F0E8;--text:#1A1A1A;--text-l:#5A5550;--accent:#2B4A8C;--accent-w:#8C3B2B;--border:#D4CFC5;--card:#FFFDF8;--overlay:rgba(26,26,26,.85);--display:'Cormorant Garamond',Georgia,serif;--body:'Avenir Next LT Pro',-apple-system,sans-serif;--max-w:1400px;--g:clamp(1.25rem,4vw,3rem)}
+html{scroll-behavior:smooth;scroll-padding-top:100px}
+body{font-family:var(--body);background:var(--bg);color:var(--text);line-height:1.6;font-weight:300;-webkit-font-smoothing:antialiased}
+img{-webkit-touch-callout:none;-webkit-user-select:none;user-select:none;pointer-events:none}
+a img,button img,.pf-card img{pointer-events:auto}
+
+/* NAV */
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.25rem var(--g);display:flex;justify-content:space-between;align-items:center;transition:background .4s,backdrop-filter .4s}
+.nav.scrolled{background:rgba(245,240,232,.92);backdrop-filter:blur(12px);box-shadow:0 1px 0 var(--border)}
+.nav-logo{font-family:var(--display);font-size:1.35rem;font-weight:400;letter-spacing:.04em;color:var(--text);text-decoration:none}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{font-size:.78rem;font-weight:400;letter-spacing:.12em;text-transform:uppercase;color:var(--text-l);text-decoration:none;transition:color .3s}
+.nav-links a:hover,.nav-links a.active{color:var(--accent)}
+.hamburger{display:none;background:none;border:none;cursor:pointer;width:28px;height:20px;position:relative;z-index:110}
+.hamburger span{display:block;width:100%;height:1.5px;background:var(--text);position:absolute;left:0;transition:all .3s}
+.hamburger span:nth-child(1){top:0}.hamburger span:nth-child(2){top:50%;transform:translateY(-50%)}.hamburger span:nth-child(3){bottom:0}
+.hamburger.active span:nth-child(1){top:50%;transform:translateY(-50%) rotate(45deg)}.hamburger.active span:nth-child(2){opacity:0}.hamburger.active span:nth-child(3){bottom:50%;transform:translateY(50%) rotate(-45deg)}
+.mobile-menu{display:none;position:fixed;inset:0;z-index:105;background:rgba(245,240,232,.98);backdrop-filter:blur(20px);flex-direction:column;justify-content:center;align-items:center;gap:2.5rem}
+.mobile-menu.open{display:flex}
+.mobile-menu a{font-family:var(--display);font-size:1.8rem;font-weight:300;color:var(--text);text-decoration:none}
+.mobile-close{position:absolute;top:1.25rem;right:var(--g);background:none;border:none;font-size:2rem;color:var(--text);cursor:pointer;z-index:111;line-height:1;padding:.25rem}
+
+section{padding:clamp(3rem,6vw,6rem) var(--g)}
+.section-label{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--text-l);margin-bottom:.75rem}
+.section-title{font-family:var(--display);font-weight:300;font-size:clamp(1.8rem,3.5vw,3rem);line-height:1.15;margin-bottom:1rem}
+.footer{border-top:1px solid var(--border);padding:2rem var(--g);display:flex;justify-content:space-between;align-items:center;max-width:var(--max-w);margin:0 auto;font-size:.78rem;color:var(--text-l);flex-wrap:wrap;gap:.75rem}
+.footer a{color:var(--text-l);text-decoration:none}
+.footer a:hover{color:var(--text)}
+.footer-links{display:flex;gap:1.5rem;flex-wrap:wrap}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* PORTFOLIO GRID */
+.portfolio-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.5rem;max-width:var(--max-w);margin:0 auto}
+.pf-card{background:var(--card);border:1px solid var(--border);overflow:hidden;text-decoration:none;color:var(--text);transition:box-shadow .3s,transform .3s}
+.pf-card:hover{box-shadow:0 8px 30px rgba(0,0,0,.08);transform:translateY(-3px)}
+.pf-card img{width:100%;aspect-ratio:1/1;object-fit:cover;display:block}
+.pf-card-info{padding:1rem 1.15rem}
+.pf-card-title{font-family:var(--display);font-size:1.15rem;font-weight:400;font-style:italic;margin-bottom:.25rem}
+.pf-card-meta{font-size:.78rem;color:var(--text-l)}
+.pf-card-price{font-family:var(--display);font-size:1.15rem;font-weight:500;margin-top:.4rem}
+.pf-badge{display:inline-block;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;padding:.2rem .5rem;background:#2B6B3B;color:#fff;margin-bottom:.35rem}
+
+/* ARTWORK DETAIL */
+.artwork-detail{max-width:var(--max-w);margin:0 auto;padding-top:6rem}
+.artwork-layout{display:grid;grid-template-columns:1.2fr 1fr;gap:clamp(2rem,4vw,4rem);align-items:start}
+.artwork-main-img{width:100%;display:block;box-shadow:0 4px 20px rgba(0,0,0,.1)}
+.artwork-info .section-title{margin-bottom:.5rem}
+.artwork-meta{font-size:.88rem;color:var(--text-l);margin-bottom:.35rem}
+.artwork-price{font-family:var(--display);font-size:1.8rem;font-weight:500;margin:1rem 0}
+.artwork-desc{font-size:.95rem;color:var(--text-l);line-height:1.75;margin-bottom:2rem}
+.artwork-actions{display:flex;gap:.75rem;flex-wrap:wrap}
+.btn{display:inline-block;text-align:center;font-family:var(--body);font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;padding:.8rem 2rem;cursor:pointer;text-decoration:none;transition:all .3s}
+.btn-outline{border:1px solid var(--text);background:none;color:var(--text)}
+.btn-outline:hover{background:var(--text);color:var(--bg)}
+.btn-solid{border:none;background:var(--accent);color:#fff}
+.btn-solid:hover{background:#1e3a6e}
+
+/* ROOM VIEW */
+.room-section{margin-top:2.5rem}
+.room-scene{position:relative;width:100%;aspect-ratio:16/10;border-radius:6px;overflow:hidden;background:#E2DDD4}
+.room-wall{position:absolute;inset:0;background:linear-gradient(180deg,#EAE5DC 0%,#E2DDD4 60%,#D6D0C5 60.5%,#C4BCB0 61%,#B8AFA2 100%)}
+.room-baseboard{position:absolute;bottom:0;left:0;right:0;height:5%;background:linear-gradient(180deg,#D6CFC3,#C8C0B3)}
+.room-floor{position:absolute;bottom:0;left:0;right:0;height:38%;background:linear-gradient(180deg,#B8AFA2 0%,#A89E90 100%)}
+.room-shadow{position:absolute;bottom:38%;left:50%;transform:translateX(-50%);width:50%;height:3%;background:radial-gradient(ellipse,rgba(0,0,0,.08) 0%,transparent 70%)}
+.room-furniture{position:absolute;bottom:38%;left:50%;transform:translateX(-50%);width:48%}
+.room-sofa-el{width:100%;aspect-ratio:4/1.6;background:linear-gradient(180deg,#A09080 0%,#8E8070 40%,#7D7060 100%);border-radius:8px 8px 4px 4px;position:relative}
+.room-sofa-el::before{content:'';position:absolute;top:15%;left:8%;right:8%;height:40%;background:linear-gradient(90deg,#B0A090,#A89888,#B0A090);border-radius:4px}
+.room-painting-wrap{position:absolute;left:50%;transform:translateX(-50%);box-shadow:0 6px 24px rgba(0,0,0,.2),0 2px 6px rgba(0,0,0,.1);background:#fff;padding:3px}
+.room-painting-wrap img{width:100%;height:100%;object-fit:cover;display:block}
+.room-caption{text-align:center;margin-top:1rem;font-size:.8rem;color:var(--text-l);font-style:italic}
+
+/* CONTACT */
+.contact-form{display:flex;flex-direction:column;gap:1.15rem;max-width:560px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1.15rem}
+.contact-form label{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text-l);display:block;margin-bottom:.35rem}
+.contact-form input,.contact-form textarea,.contact-form select{width:100%;background:var(--card);border:1px solid var(--border);padding:.8rem 1rem;font-family:var(--body);font-size:.92rem;font-weight:300;color:var(--text);transition:border-color .3s;outline:none}
+.contact-form input:focus,.contact-form textarea:focus,.contact-form select:focus{border-color:var(--accent)}
+.contact-form textarea{resize:vertical;min-height:110px}
+.contact-form button{align-self:flex-start;background:var(--text);color:var(--bg);border:none;font-family:var(--body);font-size:.78rem;letter-spacing:.15em;text-transform:uppercase;padding:.9rem 2.5rem;cursor:pointer;transition:background .3s}
+.contact-form button:hover{background:var(--accent)}
+
+/* HOME SPECIFIC */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:6rem var(--g) 4rem;text-align:center;position:relative}
+.hero-overline{font-size:.72rem;letter-spacing:.25em;text-transform:uppercase;color:var(--text-l);margin-bottom:1.25rem;opacity:0;animation:fadeUp .8s ease forwards .2s}
+.hero h1{font-family:var(--display);font-weight:300;font-size:clamp(3rem,8vw,7rem);line-height:1.05;letter-spacing:-.02em;margin-bottom:1.25rem;opacity:0;animation:fadeUp .8s ease forwards .4s}
+.hero h1 em{font-style:italic}
+.hero-sub{font-family:var(--display);font-weight:300;font-style:italic;font-size:clamp(1rem,2.2vw,1.4rem);color:var(--text-l);max-width:640px;line-height:1.5;margin-bottom:2rem;opacity:0;animation:fadeUp .8s ease forwards .6s}
+.hero-cta{display:inline-block;font-size:.78rem;letter-spacing:.15em;text-transform:uppercase;font-weight:400;color:var(--text);text-decoration:none;border:1px solid var(--text);padding:.85rem 2.2rem;transition:background .3s,color .3s;opacity:0;animation:fadeUp .8s ease forwards .8s}
+.hero-cta:hover{background:var(--text);color:var(--bg)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+.home-works-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1.5rem;max-width:var(--max-w);margin:0 auto}
+.home-works-grid img{width:100%;aspect-ratio:1/1;object-fit:cover;display:block;transition:transform .5s;box-shadow:0 8px 24px rgba(0,0,0,.15),0 2px 6px rgba(0,0,0,.08)}
+.home-works-grid a:hover img{transform:scale(1.04)}
+.img-fade{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease}
+.img-fade.img-visible{opacity:1;transform:translateY(0)}
+.about-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:clamp(2rem,5vw,4rem);align-items:center;max-width:var(--max-w);margin:0 auto}
+.about-portrait{aspect-ratio:1/1;overflow:hidden;display:flex;justify-content:center;align-items:center}
+.about-portrait img{width:100%;height:100%;object-fit:cover}
+.about-text p{font-size:1rem;line-height:1.75;color:var(--text-l);margin-bottom:1rem;max-width:520px}
+.process-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;max-width:var(--max-w);margin:2rem auto 0}
+.process-card{border-top:2px solid var(--border);padding-top:1.25rem}
+.process-card .pc-icon{display:block;margin-bottom:.9rem;color:var(--accent);opacity:.7}
+.process-card h3{font-family:var(--display);font-weight:400;font-size:1.25rem;margin-bottom:.5rem}
+.process-card p{font-size:.88rem;color:var(--text-l);line-height:1.7}
+.vision-section{background:var(--card);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:5rem var(--g);text-align:center;margin:4rem 0}
+.vision-section .vision-inner{max-width:680px;margin:0 auto}
+.vision-section .vision-label{font-size:.72rem;letter-spacing:.25em;text-transform:uppercase;color:var(--accent);margin-bottom:1.25rem}
+.vision-section .vision-quote{font-family:var(--display);font-size:clamp(1.5rem,3vw,2.4rem);font-weight:300;font-style:italic;line-height:1.35;color:var(--text);margin-bottom:1.5rem}
+.vision-section .vision-body{font-size:.95rem;line-height:1.85;color:var(--text-l)}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,4vw,4rem);max-width:var(--max-w);margin:2rem auto 0}
+.contact-info p{font-size:.95rem;color:var(--text-l);line-height:1.7;margin-bottom:1.25rem;max-width:420px}
+.contact-links a{display:block;font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);text-decoration:none;margin-bottom:.5rem;transition:color .3s}
+.contact-links a:hover{color:var(--accent-w)}
+
+@media(max-width:1024px){.process-strip{grid-template-columns:1fr}}
+
+/* EXHIBITION TIMELINE */
+.exh-timeline{display:flex;flex-direction:column;gap:0;position:relative}
+.exh-item{display:grid;grid-template-columns:32px 1fr;gap:0 1.5rem;align-items:stretch}
+.exh-dot-wrap{display:flex;flex-direction:column;align-items:center;padding-top:.2rem}
+.exh-dot{width:14px;height:14px;border-radius:50%;background:var(--accent);flex-shrink:0;box-shadow:0 0 0 4px rgba(43,74,140,.12);z-index:1}
+.exh-line{flex:1;width:2px;background:var(--border);margin:4px 0;min-height:32px}
+.exh-body{padding-bottom:2.25rem}
+.exh-date{font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:.3rem}
+.exh-name{font-family:var(--display);font-size:1.35rem;font-weight:400;font-style:italic;line-height:1.2;margin-bottom:.3rem;color:var(--text)}
+.exh-venue{font-size:.88rem;color:var(--text-l);line-height:1.5}
+@media(max-width:768px){
+  .nav-links{display:none}.hamburger{display:block}
+  .about-grid,.contact-grid,.artwork-layout{grid-template-columns:1fr}
+  .about-portrait{max-width:360px}
+  .form-row{grid-template-columns:1fr}
+  .footer{flex-direction:column;gap:.75rem;text-align:center}
+  .portfolio-grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:1rem}
+  .home-works-grid{grid-template-columns:repeat(auto-fill,minmax(140px,1fr))}
+}
+</style>
+<script type='text/javascript' src='https://api.netlify.com/fyAT6gzQkWJI8mLnFnbOWSrO6iV7IRd8X4Bl_ET9L_L4C_k4fNFy0SwxuNGKWhus43p1XFGai3KvG5JXKnPrbs-Gaxz_p0KVlWdrtkJU2FH6qLPHpwOkZPNbcqQAx9fXrmGPArT6vcG5fB7ISejsCx5x7vIaNRKIcuyMIKIokEmDwH-EVjyK2n2Q_PU5ukXYbTVG4Y-k0ajumCmUjglxnH3YVIprV2e2zp6cDVIvC4nWxdfcI1xaaCNaiLXRLWY-d8lTGEAY1yFyS_-qxxQJQz2Fm9U1I0PRLzeerADZnOnrHzwfwVoKu3S0Srb6C8R8Wju3iamebp9zvMX6nnQbBwmhVO1_HENLrC_b2ql4SOpspgfAFQz5Pz5BgOfinpA4El7Es8LL5qvsPpnEw9uWxtduyFj4ukaVoKjSSoUldTVRiVbtrRkhErYbBDyx11NCRYdc2llLZmvuHNwgVlnP5MLpzjKEVnSwQUf-bnSiN0p6tEaWCskdIn3pWAs58DI2gw1EEdvyHFpd0G_cBlIM'></script><script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+</head>
+<body>
+<nav class="nav" id="nav">
+  <a href="index.html" class="nav-logo">Henk Weijers</a>
+  <ul class="nav-links">
+    <li><a href="index.html#about" >About</a></li>
+    <li><a href="portfolio.html" >Portfolio</a></li>
+    <li><a href="index.html#approach">Approach</a></li>
+    <li><a href="index.html#exhibitions">Exhibitions</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" id="mobileClose" aria-label="Close menu">&times;</button>
+  <a href="index.html#about" onclick="closeMobile()">About</a>
+  <a href="portfolio.html" onclick="closeMobile()">Portfolio</a>
+  <a href="index.html#approach" onclick="closeMobile()">Approach</a>
+  <a href="index.html#exhibitions" onclick="closeMobile()">Exhibitions</a>
+  <a href="index.html#contact" onclick="closeMobile()">Contact</a>
+</div>
+
+<section class="hero">
+  <p class="hero-overline">Acrylic on Canvas</p>
+  <h1>Henk <em>Weijers</em></h1>
+  <p class="hero-sub">Moving between geometric abstraction and expressive Impressionism &mdash; exploring how order and intuition coexist on one canvas.</p>
+  <a href="portfolio.html" class="hero-cta">Buy My Art</a>
+</section>
+
+<section id="about">
+  <div class="about-grid reveal">
+    <div class="about-portrait"><img src="images/kin0288_web.jpg" alt="Henk Weijers" loading="lazy"></div>
+    <div class="about-text">
+      <p class="section-label">The Artist</p>
+      <h2 class="section-title">Geometric Abstraction &amp;<br>Expressive Impressionism</h2>
+      <p>Henk Weijers (b. 1959, Rotterdam, the Netherlands) is a painter based in Kuala Lumpur, Malaysia. Working primarily with acrylic on canvas, he is known for paintings that move between geometric abstraction and expressive impressionism. His work explores the relationship between structure and painterly expression, often combining clear compositional frameworks with layered colour and textured surfaces.</p>
+      <p>His paintings are characterised by defined geometric structures, an emphasis on colour relationships, and carefully balanced compositions. Within these frameworks, he develops expressive surfaces through layered application of paint and gestural marks. His subject matter includes abstract compositions as well as landscapes and architectural elements, interpreted through colour and composition rather than descriptive realism.</p>
+      <p>Weijers began painting in 2025, following an international career spanning the oil and gas industry across three continents and seven countries. These years of living and working in diverse cultural environments — from Southeast Asia to the Middle East and Latin America — deeply shaped his perspective and now inform the emotional and compositional language of his work.</p>
+
+    </div>
+  </div>
+</section>
+
+<section>
+  <div style="max-width:var(--max-w);margin:0 auto" class="reveal">
+    <p class="section-label">Selected Works</p>
+    <h2 class="section-title">Recent Paintings</h2>
+    <p style="color:var(--text-l);margin-bottom:1.5rem;font-size:.95rem">A glimpse of recent work. <a href="portfolio.html" style="color:var(--accent)">View the full portfolio &rarr;</a></p>
+  </div>
+  <div class="home-works-grid" id="homeWorksGrid">
+    <!-- Populated dynamically from works.json -->
+  </div>
+</section>
+
+<section id="approach">
+  <div style="max-width:var(--max-w);margin:0 auto" class="gsap-reveal">
+    <p class="section-label">Artistic Approach</p>
+    <h2 class="section-title">How Order Meets Intuition</h2>
+  </div>
+  <div class="process-strip">
+    <div class="process-card gsap-card">
+      <svg class="pc-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+      <h3>Structure</h3><p>Each painting begins with a geometric framework &mdash; grids, brickwork patterns, hexagonal tessellations, or isometric perspectives that establish the compositional architecture.</p>
+    </div>
+    <div class="process-card gsap-card">
+      <svg class="pc-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg>
+      <h3>Technique</h3><p>Dense acrylics applied with palette knives and dry brush, built up in layers to create depth and texture. Irregular edges and raw borders are deliberate &mdash; titanium white acts as a structural element, separating and defining chromatic zones rather than simply filling space.</p>
+    </div>
+    <div class="process-card gsap-card">
+      <svg class="pc-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="12" r="5"/><circle cx="16" cy="12" r="5"/></svg>
+      <h3>Chromatic Tension</h3><p>Deliberate chromatic contrast drives each composition. Saturated, complementary colour relationships are balanced against geometric order &mdash; the finished work lives in the dialogue between precision and painterly gesture, between planning and beautiful accident.</p>
+    </div>
+  </div>
+</section>
+
+<section class="vision-section gsap-reveal">
+  <div class="vision-inner">
+    <p class="vision-label">Artistic Vision</p>
+    <h2 class="vision-quote">Structure as a Platform for Freedom</h2>
+    <p class="vision-body">Every work is the result of a dialogue between compositional planning and openness to the unexpected &mdash; a path in constant evolution towards greater creative freedom. Geometry is not a constraint but a platform from which the gesture can reach further. The tension between rigid structure and free expression is not resolved; it is the painting.</p>
+  </div>
+</section>
+
+<section id="approach-influences">
+
+  <div style="max-width:var(--max-w);margin:3rem auto 0" class="gsap-reveal">
+    <p class="section-label">Artistic Influences</p>
+    <h2 class="section-title" style="font-size:clamp(1.4rem,2.5vw,2.2rem)">Artists Who Shaped the Work</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1rem;margin-top:1.5rem">
+      <div style="border-top:1px solid var(--border);padding-top:1rem" class="gsap-card">
+        <p style="font-family:var(--display);font-size:1.1rem;font-weight:400;margin-bottom:.2rem">Paul Cézanne</p>
+        <p style="font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:.3rem">1839–1906</p>
+        <p style="font-size:.82rem;color:var(--text-l)">Post-Impressionism</p>
+      </div>
+      <div style="border-top:1px solid var(--border);padding-top:1rem" class="gsap-card">
+        <p style="font-family:var(--display);font-size:1.1rem;font-weight:400;margin-bottom:.2rem">Vincent van Gogh</p>
+        <p style="font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:.3rem">1853–1890</p>
+        <p style="font-size:.82rem;color:var(--text-l)">Post-Impressionism</p>
+      </div>
+      <div style="border-top:1px solid var(--border);padding-top:1rem" class="gsap-card">
+        <p style="font-family:var(--display);font-size:1.1rem;font-weight:400;margin-bottom:.2rem">Paul Gauguin</p>
+        <p style="font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:.3rem">1848–1903</p>
+        <p style="font-size:.82rem;color:var(--text-l)">Post-Impressionism &middot; Symbolism</p>
+      </div>
+      <div style="border-top:1px solid var(--border);padding-top:1rem" class="gsap-card">
+        <p style="font-family:var(--display);font-size:1.1rem;font-weight:400;margin-bottom:.2rem">Henri Manguin</p>
+        <p style="font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:.3rem">1874–1949</p>
+        <p style="font-size:.82rem;color:var(--text-l)">Fauvism</p>
+      </div>
+      <div style="border-top:1px solid var(--border);padding-top:1rem" class="gsap-card">
+        <p style="font-family:var(--display);font-size:1.1rem;font-weight:400;margin-bottom:.2rem">Ferdinand Hodler</p>
+        <p style="font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:.3rem">1853–1918</p>
+        <p style="font-size:.82rem;color:var(--text-l)">Symbolism &middot; Expressionism</p>
+      </div>
+      <div style="border-top:1px solid var(--border);padding-top:1rem" class="gsap-card">
+        <p style="font-family:var(--display);font-size:1.1rem;font-weight:400;margin-bottom:.2rem">Edward Hopper</p>
+        <p style="font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:.3rem">1882–1967</p>
+        <p style="font-size:.82rem;color:var(--text-l)">American Realism</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="exhibitions">
+  <div style="max-width:var(--max-w);margin:0 auto" class="reveal">
+    <p class="section-label">Exhibition History</p>
+    <h2 class="section-title">Exhibitions</h2>
+  </div>
+  <div id="exhibitionsList" style="max-width:var(--max-w);margin:2rem auto 0">
+    <!-- Populated from exhibitions.json by script -->
+  </div>
+</section>
+
+<section id="contact">
+  <div style="max-width:560px;margin:0 auto;text-align:center" class="reveal">
+    <p class="section-label">Get in Touch</p>
+    <h2 class="section-title">Inquiries &amp; Exhibitions</h2>
+    <p style="font-size:.95rem;color:var(--text-l);line-height:1.7;margin-bottom:2.5rem">For inquiries about available works, purchases, or exhibition opportunities, reach out below or on <a href="https://www.instagram.com/henk.weijers_artist" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none">Instagram</a>.</p>
+  </div>
+  <form style="max-width:560px;margin:0 auto;display:flex;flex-direction:column;gap:1.1rem" data-netlify="true" netlify-honeypot="bot-field" name="contact" method="POST" action="/">
+    <input type="hidden" name="form-name" value="contact">
+    <p style="display:none"><label>Don't fill this out: <input name="bot-field"></label></p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+      <div style="display:flex;flex-direction:column;gap:.35rem">
+        <label style="font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-l)">Name</label>
+        <input type="text" name="name" required placeholder="Your name" style="font-family:var(--body);font-size:.9rem;padding:.7rem .9rem;border:1px solid var(--border);background:var(--card);color:var(--text);outline:none;transition:border .2s" onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'">
+      </div>
+      <div style="display:flex;flex-direction:column;gap:.35rem">
+        <label style="font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-l)">Email</label>
+        <input type="email" name="email" required placeholder="your@email.com" style="font-family:var(--body);font-size:.9rem;padding:.7rem .9rem;border:1px solid var(--border);background:var(--card);color:var(--text);outline:none;transition:border .2s" onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'">
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:.35rem">
+      <label style="font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-l)">Description</label>
+      <textarea name="message" required placeholder="Tell us about your inquiry..." rows="5" style="font-family:var(--body);font-size:.9rem;padding:.7rem .9rem;border:1px solid var(--border);background:var(--card);color:var(--text);outline:none;resize:vertical;transition:border .2s" onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'"></textarea>
+    </div>
+    <button type="submit" style="font-family:var(--body);font-size:.78rem;letter-spacing:.15em;text-transform:uppercase;padding:.9rem 2rem;background:var(--text);color:var(--bg);border:none;cursor:pointer;transition:opacity .2s;align-self:flex-start" onmouseover="this.style.opacity='.75'" onmouseout="this.style.opacity='1'">Send Message</button>
+  </form>
+</section>
+
+<footer class="footer">
+  <span>&copy; 2026 Henk Weijers. All rights reserved.</span>
+  <div class="footer-links">
+    <a href="privacy-policy.html">Privacy</a>
+    <a href="cookie-policy.html">Cookies</a>
+    <a href="https://www.instagram.com/henk.weijers_artist" target="_blank" rel="noopener"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:.35rem"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>Instagram</a>
+  </div>
+</footer>
+<script>
+var nav=document.getElementById("nav");
+if(nav){window.addEventListener("scroll",function(){nav.classList.toggle("scrolled",window.scrollY>60)})}
+var hb=document.getElementById("hamburger"),mm=document.getElementById("mobileMenu"),mc=document.getElementById("mobileClose");
+if(hb){hb.addEventListener("click",function(){hb.classList.toggle("active");mm.classList.toggle("open");document.body.style.overflow=mm.classList.contains("open")?"hidden":""})}
+if(mc){mc.addEventListener("click",function(){closeMobile()})}
+function closeMobile(){if(hb){hb.classList.remove("active");mm.classList.remove("open");document.body.style.overflow=""}}
+// Legacy reveal observer kept for any remaining .reveal elements
+var reveals=document.querySelectorAll(".reveal");
+if(reveals.length){var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add("visible");obs.unobserve(e.target)}})},{threshold:.1});reveals.forEach(function(el){obs.observe(el)});}
+
+window.addEventListener('load', function() {
+  var msg = sessionStorage.getItem('formMsg');
+  var subj = sessionStorage.getItem('formSubj');
+  if (msg || subj) {
+    setTimeout(function(){
+      var anchor = document.getElementById('contact');
+      if (anchor) anchor.scrollIntoView({behavior:'smooth', block:'start'});
+    }, 300);
+  }
+  if (msg) {
+    var el = document.getElementById('message');
+    if (el) { el.value = msg.replace(/&quot;/g, '"').replace(/&euro;/g, '€').replace(/&#39;/g, "'"); }
+    sessionStorage.removeItem('formMsg');
+  }
+  if (subj) {
+    var sel = document.getElementById('subject');
+    if (sel) { sel.value = subj; }
+    sessionStorage.removeItem('formSubj');
+  }
+});
+
+// Netlify form AJAX submit
+(function(){
+  var form = document.querySelector('form[name="contact"]');
+  if (!form) return;
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    var btn = form.querySelector('button[type="submit"]');
+    var origText = btn.textContent;
+    btn.disabled = true;
+    btn.textContent = 'Sending...';
+    var formData = new FormData(form);
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams(formData).toString()
+    }).then(function(res) {
+      if (res.ok) {
+        form.innerHTML = '<div style="text-align:center;padding:2rem 0"><p style="font-family:var(--display);font-size:1.5rem;font-weight:400;margin-bottom:.5rem">Thank you!</p><p style="color:var(--text-l)">Your message has been sent. Henk will get back to you soon.</p></div>';
+      } else { throw new Error('fail'); }
+    }).catch(function() {
+      btn.disabled = false;
+      btn.textContent = origText;
+      alert('Sorry, there was an error sending your message. Please try again.');
+    });
+  });
+})();
+</script>
+<script>
+// Load works.json and populate Recent Paintings grid
+(function(){
+  fetch('works.json').then(function(r){return r.json()}).then(function(works){
+    var sorted = works.sort(function(a,b){return (a.order||99)-(b.order||99)});
+    var grid = document.getElementById('homeWorksGrid');
+    if(!grid) return;
+    // Show only 2026 works, not sold
+    var toShow = sorted.filter(function(w){ return w.year === 2026 && w.status !== 'Sold'; });
+    var html = '';
+    for(var i=0; i<toShow.length; i++){
+      var w = toShow[i];
+      html += '<a href="works/view?id='+encodeURIComponent(w.id)+'"><img src="'+w.image+'" alt="'+w.title.replace(/"/g,'&quot;')+'" loading="lazy"></a>';
+    }
+    grid.innerHTML = html;
+    // GSAP stagger after content is set — no ScrollTrigger, animate immediately
+    if(window.gsap){
+      gsap.from(grid.querySelectorAll('a'), {
+        opacity:0, scale:0.96, y:16, duration:.6, stagger:.07, ease:'power2.out', delay:.1
+      });
+    }
+  }).catch(function(e){ console.warn('Could not load works.json', e); });
+})();
+</script>
+
+<!-- Cookie Banner -->
+<div id="cookieBanner" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;background:rgba(26,26,26,.95);backdrop-filter:blur(10px);padding:1rem clamp(1.25rem,4vw,3rem);color:#F5F0E8">
+  <div style="max-width:1400px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap">
+    <p style="font-family:'Avenir Next LT Pro',-apple-system,sans-serif;font-size:.82rem;font-weight:300;line-height:1.6;margin:0;flex:1;min-width:280px">We use essential cookies to ensure the website functions properly. No tracking or advertising cookies are used. <a href="cookie-policy.html" style="color:#7B9FD4;text-decoration:underline">Cookie Policy</a> · <a href="privacy-policy.html" style="color:#7B9FD4;text-decoration:underline">Privacy Policy</a></p>
+    <button onclick="acceptCookies()" style="background:#F5F0E8;color:#1A1A1A;border:none;font-family:'Avenir Next LT Pro',-apple-system,sans-serif;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;padding:.6rem 1.5rem;cursor:pointer;white-space:nowrap;font-weight:400;transition:background .3s">Accept</button>
+  </div>
+</div>
+<script>
+(function(){if(!localStorage.getItem('cookieConsent')){document.getElementById('cookieBanner').style.display='block'}})();
+function acceptCookies(){localStorage.setItem('cookieConsent','accepted');document.getElementById('cookieBanner').style.display='none'}
+</script>
+
+<script>
+// Load exhibitions.json and render as timeline roadmap
+(function(){
+  // Check if exhibitions are visible
+  fetch('site-content.json').then(function(r){return r.json();}).then(function(sc){
+    if(sc.exhibitions_visible === false){
+      var sec = document.getElementById('exhibitions');
+      if(sec) sec.style.display = 'none';
+    }
+  }).catch(function(){});
+
+  function fmtDate(str){
+    if(!str) return '';
+    var d = new Date(str);
+    return d.toLocaleDateString('en-GB',{month:'short',year:'numeric'});
+  }
+  fetch('exhibitions.json').then(function(r){return r.json()}).then(function(exs){
+    var el = document.getElementById('exhibitionsList');
+    if(!el) return;
+    if(!exs || !exs.length){
+      el.innerHTML = '<p style="color:var(--text-l);font-size:.9rem">No exhibitions listed yet.</p>';
+      return;
+    }
+    // Sort chronologically descending
+    exs.sort(function(a,b){ return (b.date_from||'').localeCompare(a.date_from||''); });
+
+    var html = '<div class="exh-timeline">';
+    exs.forEach(function(ex, i){
+      var dateStr = fmtDate(ex.date_from);
+      if(ex.date_to) dateStr += ' &ndash; ' + fmtDate(ex.date_to);
+      html += '<div class="exh-item">'
+        + '<div class="exh-dot-wrap"><div class="exh-dot"></div>' + (i < exs.length-1 ? '<div class="exh-line"></div>' : '') + '</div>'
+        + '<div class="exh-body">'
+        + '<p class="exh-date">'+dateStr+'</p>'
+        + '<h3 class="exh-name">'+ex.name+'</h3>'
+        + '<p class="exh-venue">'+ex.venue+'</p>'
+        + '</div>'
+        + '</div>';
+    });
+    html += '</div>';
+    el.innerHTML = html;
+  }).catch(function(){});
+})();
+</script>
+<script>
+  if (window.netlifyIdentity) {
+    window.netlifyIdentity.on("init", function(user) {
+      if (!user) { window.netlifyIdentity.on("login", function() { document.location.href = "/admin/"; }); }
+    });
+  }
+</script>
+<script src="js/gsap.min.js"></script>
+<script src="js/ScrollTrigger.min.js"></script>
+<script>
+// GSAP animations
+(function(){
+  if(!window.gsap || !window.ScrollTrigger) return;
+  gsap.registerPlugin(ScrollTrigger);
+
+  // About section: portrait slides from left, text from right
+  gsap.from('.about-portrait', {
+    scrollTrigger:{ trigger:'#about', start:'top 80%' },
+    x:-50, opacity:0, duration:.9, ease:'power2.out'
+  });
+  gsap.from('.about-text', {
+    scrollTrigger:{ trigger:'#about', start:'top 80%' },
+    x:50, opacity:0, duration:.9, ease:'power2.out'
+  });
+
+
+  // Approach cards stagger (only 3 process cards)
+  gsap.from('.process-card', {
+    scrollTrigger:{ trigger:'.process-strip', start:'top 80%' },
+    opacity:0, y:40, duration:.7, stagger:.15, ease:'power2.out'
+  });
+
+  // Artistic Influences cards stagger
+  gsap.from('#approach .gsap-card', {
+    scrollTrigger:{ trigger:'#approach .gsap-card', start:'top 88%' },
+    opacity:0, y:20, duration:.5, stagger:.07, ease:'power2.out'
+  });
+
+  // Artistic Vision + Influences block reveals
+  gsap.utils.toArray('.gsap-reveal').forEach(function(el){
+    gsap.from(el, {
+      scrollTrigger:{ trigger:el, start:'top 82%' },
+      opacity:0, y:30, duration:.7, ease:'power2.out'
+    });
+  });
+
+  // Exhibition items fade in sequence
+  ScrollTrigger.create({
+    trigger:'#exhibitionsList',
+    start:'top 85%',
+    onEnter: function(){
+      gsap.from('#exhibitionsList .exh-item', {
+        opacity:0, x:-20, duration:.5, stagger:.12, ease:'power2.out'
+      });
+    }
+  });
+
+  // Contact section
+  gsap.from('.contact-grid', {
+    scrollTrigger:{ trigger:'.contact-grid', start:'top 82%' },
+    opacity:0, y:30, duration:.7, ease:'power2.out'
+  });
+})();
+</script>
+<script>
+// Image protection — disable right-click, drag, long-press save
+document.addEventListener('contextmenu', function(e) {
+  if (e.target.tagName === 'IMG') { e.preventDefault(); return false; }
+});
+document.addEventListener('dragstart', function(e) {
+  if (e.target.tagName === 'IMG') { e.preventDefault(); return false; }
+});
+document.addEventListener('selectstart', function(e) {
+  if (e.target.tagName === 'IMG') { e.preventDefault(); return false; }
+});
+</script>
+</body>
+</html>
