@@ -1,26 +1,130 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://henk-weijers-site.netlify.app/</loc><priority>1.0</priority></url>
-  <url><loc>https://henk-weijers-site.netlify.app/portfolio.html</loc><priority>0.9</priority></url>
-  <url><loc>https://henk-weijers-site.netlify.app/works/pigeonholing.html</loc><priority>0.7</priority></url>
-  <url><loc>https://henk-weijers-site.netlify.app/works/the-relentless-red-race.html</loc><priority>0.7</priority></url>
-  <url><loc>https://henk-weijers-site.netlify.app/works/lauterbrunnen.html</loc><priority>0.7</priority></url>
-  <url><loc>https://henk-weijers-site.netlify.app/works/burgdorf.html</loc><priority>0.7</priority></url>
-  <url><loc>https://henk-weijers-site.netlify.app/works/timurid-palette.html</loc><priority>0.7</priority></url>
-  <url><loc>https://henk-weijers-site.netlify.app/works/the-musical-box.html</loc><priority>0.7</priority></url>
-  <url><loc>https://henk-weijers-site.netlify.app/works/ruby-my-dear.html</loc><priority>0.7</priority></url>
-  <url><loc>https://henk-weijers-site.netlify.app/works/fragments-of-freedom.html</loc><priority>0.7</priority></url>
-  <url><loc>https://henk-weijers-site.netlify.app/works/lavaux.html</loc><priority>0.7</priority></url>
-  <url><loc>https://henk-weijers-site.netlify.app/works/bavovna-ii.html</loc><priority>0.7</priority></url>
-  <url><loc>https://henk-weijers-site.netlify.app/works/pictures-at-an-exhibition-i.html</loc><priority>0.7</priority></url>
-  <url><loc>https://henk-weijers-site.netlify.app/works/pictures-at-an-exhibition-ii.html</loc><priority>0.7</priority></url>
-  <url><loc>https://henk-weijers-site.netlify.app/works/collected-thoughts.html</loc><priority>0.7</priority></url>
-  <url><loc>https://henk-weijers-site.netlify.app/works/impulse-versus-discipline.html</loc><priority>0.7</priority></url>
-  <url><loc>https://henk-weijers-site.netlify.app/works/dolce-maria.html</loc><priority>0.7</priority></url>
-  <url><loc>https://henk-weijers-site.netlify.app/works/dads-ties.html</loc><priority>0.7</priority></url>
-  <url><loc>https://henk-weijers-site.netlify.app/works/cerrado.html</loc><priority>0.7</priority></url>
-  <url><loc>https://henk-weijers-site.netlify.app/works/colour-dialogues.html</loc><priority>0.7</priority></url>
-  <url><loc>https://henk-weijers-site.netlify.app/works/firebreaks.html</loc><priority>0.7</priority></url>
-  <url><loc>https://henk-weijers-site.netlify.app/privacy-policy.html</loc><priority>0.3</priority></url>
-  <url><loc>https://henk-weijers-site.netlify.app/cookie-policy.html</loc><priority>0.3</priority></url>
-</urlset>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy — Henk Weijers</title>
+<meta name="description" content="Privacy policy for the Henk Weijers art website.">
+<meta name="author" content="Henk Weijers">
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta property="og:title" content="Privacy Policy — Henk Weijers">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://henk-weijers-site.netlify.app/privacy-policy.html">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#F5F0E8;--text:#1A1A1A;--text-l:#5A5550;--accent:#2B4A8C;--accent-w:#8C3B2B;--border:#D4CFC5;--card:#FFFDF8;--display:'Cormorant Garamond',Georgia,serif;--body:'DM Sans',-apple-system,sans-serif;--max-w:1400px;--g:clamp(1.25rem,4vw,3rem)}
+html{scroll-behavior:smooth;scroll-padding-top:100px}
+body{font-family:var(--body);background:var(--bg);color:var(--text);line-height:1.6;font-weight:300;-webkit-font-smoothing:antialiased}
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.25rem var(--g);display:flex;justify-content:space-between;align-items:center;transition:background .4s,backdrop-filter .4s}
+.nav.scrolled{background:rgba(245,240,232,.92);backdrop-filter:blur(12px);box-shadow:0 1px 0 var(--border)}
+.nav-logo{font-family:var(--display);font-size:1.35rem;font-weight:400;letter-spacing:.04em;color:var(--text);text-decoration:none}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{font-size:.78rem;font-weight:400;letter-spacing:.12em;text-transform:uppercase;color:var(--text-l);text-decoration:none;transition:color .3s}
+.nav-links a:hover,.nav-links a.active{color:var(--accent)}
+.hamburger{display:none;background:none;border:none;cursor:pointer;width:28px;height:20px;position:relative;z-index:110}
+.hamburger span{display:block;width:100%;height:1.5px;background:var(--text);position:absolute;left:0;transition:all .3s}
+.hamburger span:nth-child(1){top:0}.hamburger span:nth-child(2){top:50%;transform:translateY(-50%)}.hamburger span:nth-child(3){bottom:0}
+.hamburger.active span:nth-child(1){top:50%;transform:translateY(-50%) rotate(45deg)}.hamburger.active span:nth-child(2){opacity:0}.hamburger.active span:nth-child(3){bottom:50%;transform:translateY(50%) rotate(-45deg)}
+.mobile-menu{display:none;position:fixed;inset:0;z-index:105;background:rgba(245,240,232,.98);backdrop-filter:blur(20px);flex-direction:column;justify-content:center;align-items:center;gap:2.5rem}
+.mobile-menu.open{display:flex}
+.mobile-menu a{font-family:var(--display);font-size:1.8rem;font-weight:300;color:var(--text);text-decoration:none}
+.mobile-close{position:absolute;top:1.25rem;right:var(--g);background:none;border:none;font-size:2rem;color:var(--text);cursor:pointer;z-index:111;line-height:1;padding:.25rem}
+.footer{border-top:1px solid var(--border);padding:2rem var(--g);display:flex;justify-content:space-between;align-items:center;max-width:var(--max-w);margin:0 auto;font-size:.78rem;color:var(--text-l);flex-wrap:wrap;gap:.75rem}
+.footer a{color:var(--text-l);text-decoration:none}
+.footer a:hover{color:var(--text)}
+.footer-links{display:flex;gap:1.5rem;flex-wrap:wrap}
+.legal-content{max-width:780px;margin:0 auto;padding:7rem var(--g) 4rem}
+.legal-content h1{font-family:var(--display);font-weight:300;font-size:clamp(2rem,4vw,3rem);margin-bottom:.5rem}
+.legal-content .date{font-size:.82rem;color:var(--text-l);margin-bottom:2.5rem}
+.legal-content h2{font-family:var(--display);font-weight:400;font-size:1.4rem;margin:2rem 0 .75rem}
+.legal-content p,.legal-content li{font-size:.92rem;color:var(--text-l);line-height:1.8;margin-bottom:.75rem}
+.legal-content ul{padding-left:1.25rem;margin-bottom:1rem}
+.legal-content a{color:var(--accent)}
+@media(max-width:768px){.nav-links{display:none}.hamburger{display:block}.footer{flex-direction:column;text-align:center}}
+</style>
+<script type='text/javascript' src='https://api.netlify.com/C1ckRt4mdbe1twjN6pUb1iGCYI6N5gV5D7HDjBORvYqkbVbHLxUrIaclhwwGn8Qq-l7x5hNHRziUpTlZlINpGUfUHLYCHLcQNjpxSdVbDGBx3Qrhd0sLeaS4rPYLTUnfHklM1e-z85_6dBwPY-le81zCpn0plZ7-P8N3MEQ3M3nqOSAChz-A87uejdBrkzfrfKq4QBvdGg4pY4s4SD_qmQX9isA2xpvRvTx4cQk6NYqswl--afZMyTvuL6157tNdIAX5toOS3Boje1oDcZTkBktHFzac9mLh2sbOHii6Q7n2ufQYlL4BKymKG604J79xkKi2r2fPk8rdlzLre-QtRTFwVFvz735WqhkWnCUkFk5Gq0XOknrhAdabGAOXgMzWsasGBU-HQWLTnXFpvul0vPQDOrt_C05q2W7pkuNuICmaDe9Fo1f4ipR2yPknlqPRw6n4dI2GyQ7YuwCpKHvkHavHqz3law_YvJlYwIYqvpgiP72FMidUfVcQbb1UxG2lzggk3CeHEIXB_ZdCK23gsfxn-9pDvh3K'></script></head>
+<body>
+<nav class="nav" id="nav">
+  <a href="index.html" class="nav-logo">Henk Weijers</a>
+  <ul class="nav-links">
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="portfolio.html">Portfolio</a></li>
+    <li><a href="index.html#approach">Approach</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" id="mobileClose" aria-label="Close menu">&times;</button>
+  <a href="index.html#about" onclick="closeMobile()">About</a>
+  <a href="portfolio.html" onclick="closeMobile()">Portfolio</a>
+  <a href="index.html#approach" onclick="closeMobile()">Approach</a>
+  <a href="index.html#contact" onclick="closeMobile()">Contact</a>
+</div>
+
+<div class="legal-content">
+  <h1>Privacy Policy</h1>
+  <p class="date">Last updated: 24 March 2026</p>
+
+  <h2>Introduction</h2>
+  <p>This privacy policy explains how Henk Weijers ("we", "us", "our") collects, uses, and protects your personal information when you visit our website at henk-weijers-site.netlify.app.</p>
+
+  <h2>Data Controller</h2>
+  <p>Henk Weijers is the data controller for this website. For any privacy-related questions, please use the <a href="index.html#contact">contact form</a> on our website.</p>
+
+  <h2>Information We Collect</h2>
+  <p><strong>Contact Form Submissions:</strong> When you use our contact form, we collect your name, email address, subject selection, and message content. This data is processed by Netlify Forms and delivered to us via email. We use this information solely to respond to your inquiry.</p>
+  <p><strong>Hosting Data:</strong> Our hosting provider Netlify automatically collects standard server logs including IP addresses, browser type, and pages visited. This data is used for security and performance purposes and is governed by <a href="https://www.netlify.com/privacy/" target="_blank" rel="noopener">Netlify's privacy policy</a>.</p>
+  <p><strong>Google Fonts:</strong> This website loads fonts from Google Fonts. When fonts are loaded, your browser sends a request to Google's servers, which may include your IP address. This is governed by <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google's privacy policy</a>.</p>
+
+  <h2>How We Use Your Information</h2>
+  <p>We use the information collected through the contact form exclusively to respond to your inquiries about artworks, purchases, commissions, or exhibitions. We do not use your information for marketing purposes unless you explicitly request to be contacted about future works.</p>
+
+  <h2>Data Sharing</h2>
+  <p>We do not sell, rent, or share your personal information with third parties, except as necessary for our hosting and form processing services (Netlify).</p>
+
+  <h2>Data Retention</h2>
+  <p>Contact form submissions are retained for as long as necessary to complete the inquiry or transaction. You may request deletion of your data at any time by contacting us.</p>
+
+  <h2>Your Rights (GDPR)</h2>
+  <p>Under the General Data Protection Regulation, you have the right to:</p>
+  <ul>
+    <li>Access the personal data we hold about you</li>
+    <li>Request correction of inaccurate data</li>
+    <li>Request deletion of your data</li>
+    <li>Object to or restrict processing of your data</li>
+    <li>Data portability</li>
+    <li>Lodge a complaint with a supervisory authority</li>
+  </ul>
+  <p>To exercise any of these rights, please contact us through the <a href="index.html#contact">contact form</a>.</p>
+
+  <h2>Security</h2>
+  <p>We take reasonable measures to protect your personal information. Our website is served over HTTPS, and form submissions are encrypted in transit. However, no method of transmission over the internet is 100% secure.</p>
+
+  <h2>Children's Privacy</h2>
+  <p>This website is not directed at children under 16. We do not knowingly collect personal information from children.</p>
+
+  <h2>Changes to This Policy</h2>
+  <p>We may update this privacy policy from time to time. Changes will be posted on this page with an updated revision date.</p>
+</div>
+
+<footer class="footer">
+  <span>&copy; 2026 Henk Weijers. All rights reserved.</span>
+  <div class="footer-links">
+    <a href="privacy-policy.html">Privacy Policy</a>
+    <a href="cookie-policy.html">Cookie Policy</a>
+    <a href="https://www.instagram.com/henk.weijers_artist" target="_blank" rel="noopener"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:.35rem"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>Instagram</a>
+  </div>
+</footer>
+<script>
+var nav=document.getElementById("nav");
+if(nav){window.addEventListener("scroll",function(){nav.classList.toggle("scrolled",window.scrollY>60)})}
+var hb=document.getElementById("hamburger"),mm=document.getElementById("mobileMenu"),mc=document.getElementById("mobileClose");
+if(hb){hb.addEventListener("click",function(){hb.classList.toggle("active");mm.classList.toggle("open");document.body.style.overflow=mm.classList.contains("open")?"hidden":""})}
+if(mc){mc.addEventListener("click",function(){closeMobile()})}
+function closeMobile(){if(hb){hb.classList.remove("active");mm.classList.remove("open");document.body.style.overflow=""}}
+</script>
+</body>
+</html>

@@ -1,5 +1,30 @@
-User-agent: *
-Allow: /
-Disallow: /admin/
+[build]
+  publish = "."
+  functions = "netlify/functions"
 
-Sitemap: https://henk-weijers-site.netlify.app/sitemap.xml
+# Installs dependencies declared in netlify/functions/package.json
+[[plugins]]
+  package = "@netlify/plugin-functions-install-core"
+
+# Clean URLs
+[[redirects]]
+  from = "/works/view"
+  to = "/works/view.html"
+  status = 200
+
+[[redirects]]
+  from = "/portfolio"
+  to = "/portfolio.html"
+  status = 200
+
+[[redirects]]
+  from = "/about"
+  to = "/about.html"
+  status = 200
+
+# Security headers for admin
+[[headers]]
+  for = "/admin/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"

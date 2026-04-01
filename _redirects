@@ -1,20 +1,58 @@
-# Redirect old static work pages to dynamic viewer
-/works/pigeonholing.html         /works/view.html?id=pigeonholing              302
-/works/the-relentless-red-race.html  /works/view.html?id=the-relentless-red-race  302
-/works/lauterbrunnen.html        /works/view.html?id=lauterbrunnen             302
-/works/burgdorf.html             /works/view.html?id=burgdorf                  302
-/works/timurid-palette.html      /works/view.html?id=timurid-palette           302
-/works/the-musical-box.html      /works/view.html?id=the-musical-box           302
-/works/ruby-my-dear.html         /works/view.html?id=ruby-my-dear              302
-/works/fragments-of-freedom.html /works/view.html?id=fragments-of-freedom      302
-/works/lavaux.html               /works/view.html?id=lavaux                    302
-/works/bavovna-ii.html           /works/view.html?id=bavovna-ii                302
-/works/pictures-at-an-exhibition-i.html  /works/view.html?id=pictures-at-an-exhibition-i   302
-/works/pictures-at-an-exhibition-ii.html /works/view.html?id=pictures-at-an-exhibition-ii  302
-/works/collected-thoughts.html   /works/view.html?id=collected-thoughts         302
-/works/impulse-versus-discipline.html /works/view.html?id=impulse-versus-discipline 302
-/works/dolce-maria.html          /works/view.html?id=dolce-maria                302
-/works/dads-ties.html            /works/view.html?id=dads-ties                  302
-/works/cerrado.html              /works/view.html?id=cerrado                    302
-/works/colour-dialogues.html     /works/view.html?id=colour-dialogues           302
-/works/firebreaks.html           /works/view.html?id=firebreaks                 302
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+
+exports.handler = async function(event) {
+  if (event.httpMethod !== 'POST') {
+    return { statusCode: 405, body: 'Method Not Allowed' };
+  }
+
+  try {
+    const { artworkId, title, price, imageUrl } = JSON.parse(event.body);
+
+    if (!title || !price) {
+      return { statusCode: 400, body: JSON.stringify({ error: 'Missing required fields' }) };
+    }
+
+    const siteUrl = process.env.URL || 'https://henk-weijers-site.netlify.app';
+
+    const sessionParams = {
+      payment_method_types: ['card'],
+      line_items: [{
+        price_data: {
+          currency: 'eur',
+          product_data: {
+            name: title,
+            description: 'Original acrylic painting by Henk Weijers',
+          },
+          unit_amount: Math.round(parseFloat(price) * 100),
+        },
+        quantity: 1,
+      }],
+      mode: 'payment',
+      success_url: siteUrl + '/payment-success.html?artwork=' + encodeURIComponent(title) + '&id=' + encodeURIComponent(artworkId || ''),
+      cancel_url: siteUrl + '/works/view.html?id=' + encodeURIComponent(artworkId || ''),
+      metadata: {
+        artwork_id: artworkId || '',
+        artwork_title: title,
+      },
+    };
+
+    if (imageUrl) {
+      sessionParams.line_items[0].price_data.product_data.images = [imageUrl];
+    }
+
+    const session = await stripe.checkout.sessions.create(sessionParams);
+
+    return {
+      statusCode: 200,
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ url: session.url }),
+    };
+  } catch (err) {
+    console.error('Stripe error:', err);
+    return {
+      statusCode: 500,
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ error: err.message }),
+    };
+  }
+};
