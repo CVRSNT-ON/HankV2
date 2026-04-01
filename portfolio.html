@@ -64,12 +64,13 @@ section{padding:clamp(3rem,6vw,6rem) var(--g)}
 .filter-btn.filter-active{background:var(--text);color:var(--bg);border-color:var(--text)}
 .pf-fade{opacity:0;transform:translateY(18px);transition:opacity .5s ease,transform .5s ease}
 .pf-fade.pf-visible{opacity:1;transform:translateY(0)}
-.pf-card img{width:100%;aspect-ratio:1/1;object-fit:cover;display:block}
+.pf-card-img-wrap{width:100%;background:var(--bg);overflow:hidden;display:flex;align-items:center;justify-content:center;min-height:200px}
+.pf-card-img-wrap img{width:100%;height:auto;max-height:320px;object-fit:contain;display:block}
 .pf-card-info{padding:1rem 1.15rem}
 .pf-card-title{font-family:var(--display);font-size:1.15rem;font-weight:400;font-style:italic;margin-bottom:.25rem}
 .pf-card-meta{font-size:.78rem;color:var(--text-l)}
 .pf-card-price{font-family:var(--display);font-size:1.15rem;font-weight:500;margin-top:.4rem}
-.pf-badge{display:inline-block;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;padding:.2rem .5rem;background:#2B6B3B;color:#fff;margin-bottom:.35rem}
+.pf-badge{display:inline-block;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;padding:.2rem .5rem;background:#2B6B3B;color:#fff!important;margin-bottom:.35rem}
 
 /* ARTWORK DETAIL */
 .artwork-detail{max-width:var(--max-w);margin:0 auto;padding-top:6rem}
@@ -158,6 +159,7 @@ section{padding:clamp(3rem,6vw,6rem) var(--g)}
     <li><a href="index.html#about" >About</a></li>
     <li><a href="portfolio.html" class=active>Portfolio</a></li>
     <li><a href="index.html#approach">Approach</a></li>
+    <li><a href="index.html#exhibitions">Exhibitions</a></li>
     <li><a href="index.html#contact">Contact</a></li>
   </ul>
   <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
@@ -167,6 +169,7 @@ section{padding:clamp(3rem,6vw,6rem) var(--g)}
   <a href="index.html#about" onclick="closeMobile()">About</a>
   <a href="portfolio.html" onclick="closeMobile()">Portfolio</a>
   <a href="index.html#approach" onclick="closeMobile()">Approach</a>
+  <a href="index.html#exhibitions" onclick="closeMobile()">Exhibitions</a>
   <a href="index.html#contact" onclick="closeMobile()">Contact</a>
 </div>
 
@@ -254,7 +257,7 @@ section{padding:clamp(3rem,6vw,6rem) var(--g)}
       var w = filtered[i];
       var badgeColor = w.status==='Available'?'#2B6B3B':w.status==='Sold'?'#9B2C2C':'#8B6914';
       html += '<a href="works/view?id='+encodeURIComponent(w.id)+'" class="pf-card pf-fade">'
-        + '<img src="'+w.image+'" alt="'+w.title.replace(/"/g,'&quot;')+'" loading="lazy">'
+        + '<div class="pf-card-img-wrap"><img src="'+w.image+'" alt="'+w.title.replace(/"/g,'&quot;')+'" loading="lazy"></div>'
         + '<div class="pf-card-info">'
         + '<span class="pf-badge" style="background:'+badgeColor+'">'+w.status+'</span>'
         + '<h3 class="pf-card-title">'+w.title+'</h3>'

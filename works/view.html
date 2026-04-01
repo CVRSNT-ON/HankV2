@@ -60,7 +60,7 @@ section{padding:clamp(3rem,6vw,6rem) var(--g)}
 .btn-outline:hover{background:var(--text);color:var(--bg)}
 .btn-solid{background:var(--accent);color:#fff}
 .btn-solid:hover{background:#1e3a6e}
-.pf-badge{display:inline-block;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;padding:.2rem .5rem;color:#fff;margin-bottom:.35rem}
+.pf-badge{display:inline-block;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;padding:.2rem .5rem;color:#fff!important;margin-bottom:.35rem}
 
 /* ROOM VIEW WITH PHOTOS */
 .room-section{margin-top:2.5rem}
@@ -109,9 +109,10 @@ img{-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}
 
 /* Frame styles applied to .room-painting-inner */
 .room-painting-inner.frame-none{border:none;box-shadow:0 12px 40px rgba(0,0,0,.45),0 4px 12px rgba(0,0,0,.30)}
-.room-painting-inner.frame-black{border:4px solid #1a1a1a;box-shadow:0 14px 44px rgba(0,0,0,.5),0 4px 12px rgba(0,0,0,.35),inset 0 0 0 1px rgba(255,255,255,.10)}
-.room-painting-inner.frame-wood{border:4px solid #8a6535;box-shadow:inset 0 0 0 1px #5a3e18,0 14px 44px rgba(0,0,0,.45),0 4px 12px rgba(0,0,0,.30)}
-.room-painting-inner.frame-white{border:4px solid #f0ede8;box-shadow:inset 0 0 0 1px #c8c4be,0 14px 44px rgba(0,0,0,.35),0 4px 12px rgba(0,0,0,.20)}
+.room-painting-inner.frame-black{border:16px solid #141414;box-shadow:inset 0 2px 0 rgba(255,255,255,.12),inset 0 -2px 0 rgba(0,0,0,.9),inset 2px 0 0 rgba(255,255,255,.06),inset -2px 0 0 rgba(0,0,0,.9),inset 0 0 12px rgba(0,0,0,.5),0 20px 55px rgba(0,0,0,.6),0 6px 18px rgba(0,0,0,.35)}
+.room-painting-inner.frame-wood{border:18px solid #7a5225;box-shadow:inset 0 2px 0 rgba(220,170,90,.4),inset 0 -2px 0 rgba(30,15,0,.8),inset 2px 0 0 rgba(200,140,60,.3),inset -2px 0 0 rgba(30,15,0,.8),inset 0 0 10px rgba(0,0,0,.3),0 18px 50px rgba(0,0,0,.55),0 5px 15px rgba(0,0,0,.3)}
+.room-painting-inner.frame-gold{border:18px solid #b8920a;box-shadow:inset 0 2px 0 rgba(255,230,80,.5),inset 0 -2px 0 rgba(80,50,0,.8),inset 2px 0 0 rgba(255,210,40,.4),inset -2px 0 0 rgba(80,50,0,.8),inset 0 0 10px rgba(0,0,0,.25),0 20px 55px rgba(0,0,0,.55),0 5px 16px rgba(0,0,0,.32)}
+.room-painting-inner.frame-white{border:16px solid #f5f2ed;box-shadow:inset 0 2px 0 rgba(255,255,255,.95),inset 0 -2px 0 rgba(0,0,0,.12),inset 2px 0 0 rgba(255,255,255,.9),inset -2px 0 0 rgba(0,0,0,.12),inset 0 0 6px rgba(0,0,0,.06),0 16px 44px rgba(0,0,0,.38),0 4px 14px rgba(0,0,0,.22),0 0 0 1px rgba(0,0,0,.08)}
 @media(max-width:768px){
   .nav-links{display:none}.hamburger{display:block}
   .artwork-layout{grid-template-columns:1fr}
@@ -129,6 +130,7 @@ img{-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}
     <li><a href="../index.html#about">About</a></li>
     <li><a href="../portfolio.html" class="active">Portfolio</a></li>
     <li><a href="../index.html#approach">Approach</a></li>
+    <li><a href="../index.html#exhibitions">Exhibitions</a></li>
     <li><a href="../index.html#contact">Contact</a></li>
   </ul>
   <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
@@ -138,6 +140,7 @@ img{-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}
   <a href="../index.html#about" onclick="closeMobile()">About</a>
   <a href="../portfolio.html" onclick="closeMobile()">Portfolio</a>
   <a href="../index.html#approach" onclick="closeMobile()">Approach</a>
+  <a href="../index.html#exhibitions" onclick="closeMobile()">Exhibitions</a>
   <a href="../index.html#contact" onclick="closeMobile()">Contact</a>
 </div>
 
@@ -226,7 +229,7 @@ if(!artworkId){
 
     var inquireMsg = 'Dear Henk, I am interested in: "'+work.title+'" at the price of €'+work.price+'.00. Can you give me additional information?';
 
-    var arBtn = '<button class="btn-ar" onclick="openAR(\'../'+work.image+'\',\''+work.id+'\')">'
+    var arBtn = '<button class="btn-ar" onclick="openAR(\'../'+work.image+'\')">'
       + '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3H3v4"/><path d="M19 3h2v4"/><path d="M5 21H3v-4"/><path d="M19 21h2v-4"/><rect x="7" y="7" width="10" height="10" rx="1"/></svg>'
       + 'View in AR</button>';
 
@@ -280,8 +283,9 @@ if(!artworkId){
       var frameSelectorHtml = '<div class="frame-selector">'
         + '<span class="frame-label">Frame:</span>'
         + '<button class="frame-btn active" onclick="setFrame(this,\'frame-none\')">No Frame</button>'
-        + '<button class="frame-btn" onclick="setFrame(this,\'frame-black\')">Thin Black</button>'
-        + '<button class="frame-btn" onclick="setFrame(this,\'frame-wood\')">Natural Wood</button>'
+        + '<button class="frame-btn" onclick="setFrame(this,\'frame-black\')">Black</button>'
+        + '<button class="frame-btn" onclick="setFrame(this,\'frame-wood\')">Walnut</button>'
+        + '<button class="frame-btn" onclick="setFrame(this,\'frame-gold\')">Gold</button>'
         + '<button class="frame-btn" onclick="setFrame(this,\'frame-white\')">White</button>'
         + '</div>';
 
@@ -380,12 +384,39 @@ function switchRoom(idx) {
 }
 
 function handleBuyNow(btn) {
-  var title = document.querySelector('.section-title') ? document.querySelector('.section-title').textContent : 'this artwork';
+  var title = document.querySelector('.section-title') ? document.querySelector('.section-title').textContent.trim() : 'this artwork';
   var price = btn.dataset.price;
-  var msg = 'Dear Henk, I would like to purchase: "' + title + '" at the price of \u20ac' + price + '.00. Can you send payment details?';
-  sessionStorage.setItem('formMsg', msg);
-  sessionStorage.setItem('formSubj', 'purchase');
-  window.location.href = '../index.html#contact';
+  var artworkId = btn.dataset.id;
+  var work = window._currentWork;
+  var imageUrl = work && work.image ? 'https://henk-weijers-site.netlify.app/' + work.image : '';
+
+  btn.disabled = true;
+  var origText = btn.textContent;
+  btn.textContent = 'Loading\u2026';
+
+  fetch('/.netlify/functions/create-checkout', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      artworkId: artworkId,
+      title: title,
+      price: parseFloat(price),
+      imageUrl: imageUrl
+    })
+  })
+  .then(function(r) { return r.json(); })
+  .then(function(data) {
+    if (data.url) {
+      window.location.href = data.url;
+    } else {
+      throw new Error(data.error || 'Checkout unavailable');
+    }
+  })
+  .catch(function(err) {
+    btn.disabled = false;
+    btn.textContent = origText;
+    alert('Sorry, there was an error starting checkout. Please try again or contact Henk directly.');
+  });
 }
 
 function handleInquire() {
@@ -437,47 +468,7 @@ function acceptCookies(){localStorage.setItem('cookieConsent','accepted');docume
 // ── AR OVERLAY — WebXR Hit-Test + Three.js ────────────────
 var _arStream = null, _arSession = null, _arRenderer = null, _arMode = null;
 
-function _isIOS() {
-  return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-}
-function _isAndroid() {
-  return /Android/.test(navigator.userAgent);
-}
-
-function openAR(imgSrc, workId) {
-  // ── iOS: Apple AR Quick Look (ARKit native, no app install) ──────────
-  if (_isIOS() && workId) {
-    var usdzUrl = '../ar/' + workId + '.usdz?v=' + Date.now();
-    var a = document.createElement('a');
-    a.rel = 'ar';
-    a.href = usdzUrl;
-    // Quick Look requires an <img> child to trigger
-    var img = document.createElement('img');
-    img.src = imgSrc;
-    img.style.cssText = 'position:absolute;width:1px;height:1px;opacity:0;pointer-events:none';
-    a.appendChild(img);
-    document.body.appendChild(a);
-    a.click();
-    setTimeout(function(){ document.body.removeChild(a); }, 500);
-    return;
-  }
-
-  // ── Android: Google Scene Viewer (ARCore native, no app install) ──────
-  if (_isAndroid() && workId) {
-    var glbUrl = window.location.origin + window.location.pathname.replace('works/view.html','') + 'ar/' + workId + '.glb';
-    // Build absolute URL robustly
-    var base = window.location.href.replace(/works\/view\.html.*/, '');
-    var absGlb = base + 'ar/' + workId + '.glb?v=' + Date.now();
-    var intentUrl = 'intent://arvr.google.com/scene-viewer/1.0'
-      + '?file=' + encodeURIComponent(absGlb)
-      + '&mode=ar_preferred'
-      + '&resizable=true'
-      + '#Intent;scheme=https;package=com.google.ar.core;action=android.intent.action.VIEW;end';
-    window.location.href = intentUrl;
-    return;
-  }
-
-  // ── Desktop / fallback: WebXR → camera overlay ────────────────────────
+function openAR(imgSrc) {
   var overlay = document.getElementById('arOverlay');
   overlay.classList.add('open');
   document.body.style.overflow = 'hidden';

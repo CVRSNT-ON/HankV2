@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thank you — Henk Weijers</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+@font-face{font-family:'Avenir Next LT Pro';src:url('fonts/AvenirNextLTPro-Regular.otf') format('opentype');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'Avenir Next LT Pro';src:url('fonts/AvenirNextLTPro-UltLt.otf') format('opentype');font-weight:300;font-style:normal;font-display:swap}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#F5F0E8;--text:#1A1A1A;--text-l:#5A5550;--accent:#2B4A8C;--border:#D4CFC5;--card:#FFFDF8;--display:'Cormorant Garamond',Georgia,serif;--body:'Avenir Next LT Pro',-apple-system,sans-serif}
+body{font-family:var(--body);background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:2rem;text-align:center;-webkit-font-smoothing:antialiased}
+.success-icon{width:64px;height:64px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;margin:0 auto 2rem}
+.success-icon svg{stroke:#fff}
+.success-label{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:.75rem}
+h1{font-family:var(--display);font-weight:300;font-size:clamp(2rem,5vw,3.5rem);line-height:1.15;margin-bottom:1rem}
+.artwork-name{font-family:var(--display);font-style:italic;font-size:1.2rem;color:var(--text-l);margin-bottom:1.5rem;min-height:1.5rem}
+p{font-size:.95rem;color:var(--text-l);line-height:1.75;max-width:480px;margin:0 auto 2rem}
+.btn{display:inline-block;font-family:var(--body);font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;padding:.8rem 2rem;text-decoration:none;border:1px solid var(--text);color:var(--text);transition:all .3s;margin:.35rem}
+.btn:hover{background:var(--text);color:var(--bg)}
+.btn-solid{background:var(--accent);color:#fff;border-color:var(--accent)}
+.btn-solid:hover{background:#1e3a6e;border-color:#1e3a6e}
+</style>
+</head>
+<body>
+<div class="success-icon">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+</div>
+<p class="success-label">Purchase Complete</p>
+<h1>Thank You!</h1>
+<p class="artwork-name" id="artworkName"></p>
+<p>Your payment has been received. Henk will be in touch shortly with shipping details and your certificate of authenticity.</p>
+<div>
+  <a href="portfolio.html" class="btn">Browse More Works</a>
+  <a href="index.html#contact" class="btn btn-solid">Contact Henk</a>
+</div>
+<script>
+var params = new URLSearchParams(window.location.search);
+var artwork = params.get('artwork');
+if(artwork) document.getElementById('artworkName').textContent = '\u201c' + artwork + '\u201d';
+</script>
+</body>
+</html>

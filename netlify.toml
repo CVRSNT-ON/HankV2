@@ -1,5 +1,6 @@
 [build]
   publish = "."
+  functions = "netlify/functions"
 
 # Clean URLs
 [[redirects]]
@@ -16,19 +17,6 @@
   from = "/about"
   to = "/about.html"
   status = 200
-
-# AR model files — no aggressive caching so updates propagate
-[[headers]]
-  for = "/ar/*.usdz"
-  [headers.values]
-    Cache-Control = "public, max-age=0, must-revalidate"
-    Content-Type = "model/vnd.usdz+zip"
-
-[[headers]]
-  for = "/ar/*.glb"
-  [headers.values]
-    Cache-Control = "public, max-age=0, must-revalidate"
-    Content-Type = "model/gltf-binary"
 
 # Security headers for admin
 [[headers]]

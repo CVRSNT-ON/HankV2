@@ -116,8 +116,11 @@ section{padding:clamp(3rem,6vw,6rem) var(--g)}
 @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
 
 .home-works-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1.5rem;max-width:var(--max-w);margin:0 auto}
-.home-works-grid img{width:100%;aspect-ratio:1/1;object-fit:cover;display:block;transition:transform .5s;box-shadow:0 8px 24px rgba(0,0,0,.15),0 2px 6px rgba(0,0,0,.08)}
-.home-works-grid a:hover img{transform:scale(1.04)}
+.hw-item{display:block;text-decoration:none;color:var(--text)}
+.hw-img-wrap{overflow:hidden;background:var(--bg);border:1px solid var(--border);box-shadow:0 8px 24px rgba(0,0,0,.15),0 2px 6px rgba(0,0,0,.08)}
+.hw-img-wrap img{width:100%;height:auto;max-height:300px;object-fit:contain;display:block;transition:transform .5s}
+.hw-item:hover .hw-img-wrap img{transform:scale(1.04)}
+.hw-title{font-family:var(--display);font-size:.9rem;font-weight:400;font-style:italic;text-align:center;padding:.5rem .25rem .25rem;color:var(--text-l)}
 .img-fade{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease}
 .img-fade.img-visible{opacity:1;transform:translateY(0)}
 .about-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:clamp(2rem,5vw,4rem);align-items:center;max-width:var(--max-w);margin:0 auto}
@@ -235,13 +238,23 @@ section{padding:clamp(3rem,6vw,6rem) var(--g)}
       <h3>Chromatic Tension</h3><p>Deliberate chromatic contrast drives each composition. Saturated, complementary colour relationships are balanced against geometric order &mdash; the finished work lives in the dialogue between precision and painterly gesture, between planning and beautiful accident.</p>
     </div>
   </div>
+  <div style="max-width:var(--max-w);margin:3rem auto 0" class="reveal">
+    <div style="border-left:3px solid var(--accent);padding:1.1rem 1.8rem;background:var(--card)">
+      <p style="font-family:var(--display);font-size:1.05rem;font-weight:300;font-style:italic;line-height:1.9;color:var(--text-l);margin-bottom:.9rem">The pictorial research of Henk Weijers is distinguished by an intense and structural use of matter, where color does not merely define the image, but shapes its rhythm, depth, and visual tension. Through dense acrylics applied with palette knives and dry brush techniques, the artist creates stratified surfaces in which each mark retains the memory of the process.</p>
+      <p style="font-size:.93rem;line-height:1.85;color:var(--text-l);margin-bottom:.6rem">The composition unfolds through successive layers, allowing traces, irregular edges, and impasto areas to emerge, making the act of painting itself visible. Within this balance between control and spontaneity, the background remains an active part of the work, contributing to its internal structure.</p>
+      <p style="font-size:.93rem;line-height:1.85;color:var(--text-l);margin-bottom:.9rem">Equally fundamental is the chromatic dialogue between predominant cool tones and warmer accents, while titanium white acts as an ordering element, guiding the light and articulating space. The result is an essential yet vibrant painting practice, in which compositional rigor and material immediacy coexist with remarkable coherence.</p>
+      <p style="font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--accent)">Ludovica Dagna &mdash; Art Curator</p>
+    </div>
+  </div>
 </section>
 
 <section class="vision-section gsap-reveal">
   <div class="vision-inner">
     <p class="vision-label">Artistic Vision</p>
     <h2 class="vision-quote">Structure as a Platform for Freedom</h2>
-    <p class="vision-body">Every work is the result of a dialogue between compositional planning and openness to the unexpected &mdash; a path in constant evolution towards greater creative freedom. Geometry is not a constraint but a platform from which the gesture can reach further. The tension between rigid structure and free expression is not resolved; it is the painting.</p>
+    <p class="vision-body">The artistic vision of Henk Weijers emerges from the encounter between a strong creative impulse and a constant tension toward form. His visual language is rooted in a personal journey shaped by years spent in an environment governed by standards, structures, and external expectations&mdash;elements that still resonate today in the presence of geometry, defined contours, and essential lines.</p>
+    <p class="vision-body" style="margin-top:1.1rem">Through painting, Weijers explores the delicate balance between control and free expression, transforming the surface into a space of inner investigation. His work thus takes shape as a gradual movement toward a more authentic expressive freedom, in which structure does not disappear, but is instead confronted, absorbed, and ultimately transcended by the gesture.</p>
+    <p style="font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-top:1.5rem">Ludovica Dagna &mdash; Art Curator</p>
   </div>
 </section>
 
@@ -401,12 +414,15 @@ window.addEventListener('load', function() {
     var html = '';
     for(var i=0; i<toShow.length; i++){
       var w = toShow[i];
-      html += '<a href="works/view?id='+encodeURIComponent(w.id)+'"><img src="'+w.image+'" alt="'+w.title.replace(/"/g,'&quot;')+'" loading="lazy"></a>';
+      html += '<a href="works/view?id='+encodeURIComponent(w.id)+'" class="hw-item">'
+        + '<div class="hw-img-wrap"><img src="'+w.image+'" alt="'+w.title.replace(/"/g,'&quot;')+'" loading="lazy"></div>'
+        + '<p class="hw-title">'+w.title+'</p>'
+        + '</a>';
     }
     grid.innerHTML = html;
     // GSAP stagger after content is set — no ScrollTrigger, animate immediately
     if(window.gsap){
-      gsap.from(grid.querySelectorAll('a'), {
+      gsap.from(grid.querySelectorAll('.hw-item'), {
         opacity:0, scale:0.96, y:16, duration:.6, stagger:.07, ease:'power2.out', delay:.1
       });
     }
